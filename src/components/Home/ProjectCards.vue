@@ -37,16 +37,18 @@ export default {
 .project {
   position: relative;
   width: auto;
+  max-width: 320px;
   height: 490px;
   background: #fff;
   border-radius: 24px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.16);
   display: flex;
   flex-flow: column nowrap;
+  margin-bottom: 10px;
 }
 
 .img {
-  width: 320px;
+  width: auto;
   height: 310px;
   background-size: cover;
   background-position: center;

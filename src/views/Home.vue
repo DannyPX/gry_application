@@ -1,36 +1,37 @@
 <template>
   <div id="home">
     <Topbar title="Projects" />
-    <flickity class="projects" :options="flickityOptions">
-      <ProjectCards
-        class="project-item"
+    <splide :options="options" class="projects">
+      <splide-slide
         v-for="(project, index) in projects"
         :key="'project: ' + index"
-        :title="project.title"
-        :image="project.image"
-        :percentage="project.percentage"
-      />
-    </flickity>
+      >
+        <ProjectCards
+          :title="project.title"
+          :image="project.image"
+          :percentage="project.percentage"
+        />
+      </splide-slide>
+    </splide>
   </div>
 </template>
 
 <script>
-import Flickity from "vue-flickity";
+import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import ProjectCards from "@/components/Home/ProjectCards.vue";
 import Topbar from "@/components/Universal/Topbar.vue";
+import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 
 export default {
   name: "Home",
   data() {
     return {
-      flickityOptions: {
-        initialIndex: 0,
-        prevNextButtons: false,
-        pageDots: true,
-        wrapAround: false,
-        selectedAttraction: 0.1,
-        friction: 0.4,
-        dragThreshold: 5
+      options: {
+        perPage: 1,
+        pagination: true,
+        gap: "2rem",
+        autoHeight: true,
+        arrows: false
       },
       projects: [
         {
@@ -52,43 +53,43 @@ export default {
     };
   },
   components: {
-    Flickity,
+    Splide,
+    SplideSlide,
     ProjectCards,
     Topbar
   }
 };
 </script>
 
+<style scoped>
+.projects {
+  margin-top: 5vh;
+}
+</style>
+
 <style>
-.projects .flickity-viewport {
-  height: calc(60vh + 30px) !important;
+.splide__pagination {
+  bottom: -5vh;
 }
 
-.flickity-page-dots .dot {
+.splide__pagination__page {
   width: 14px;
   height: 14px;
   background: transparent;
-  margin: 3px;
-  opacity: 1;
   border: 1px solid #787878;
   box-sizing: border-box;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.flickity-page-dots .dot.is-selected {
-  border: none;
+.splide__pagination__page.is-active {
+  transform: scale(1.2);
   background: linear-gradient(180deg, #62d7db 0%, #00afb5 100%);
-}
-</style>
-
-<style scoped>
-.projects {
-  margin-top: 5vh;
+  border: none;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.project-item {
-  margin-right: 30px;
-  display: flex;
-  align-items: center;
+.splide__slide {
+  padding-left: calc((100vw - 320px) / 2);
 }
 </style>
