@@ -1,5 +1,6 @@
 <template>
   <div id="home">
+    <Topbar title="Projects" />
     <flickity class="projects" ref="flickity" :options="flickityOptions">
       <ProjectCards
         class="project-item"
@@ -16,6 +17,7 @@
 <script>
 import Flickity from "vue-flickity";
 import ProjectCards from "@/components/Home/ProjectCards.vue";
+import Topbar from "@/components/Universal/Topbar.vue";
 
 export default {
   name: "Home",
@@ -51,7 +53,8 @@ export default {
   },
   components: {
     Flickity,
-    ProjectCards
+    ProjectCards,
+    Topbar
   }
 };
 </script>
