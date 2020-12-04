@@ -9,7 +9,7 @@
         <span class="title">{{ title }}</span>
         <div class="progress">
           <div class="bar">
-            <div class="inner-bar"></div>
+            <div :style="'width: ' + percentage + '%;'" class="inner-bar"></div>
           </div>
           <span class="percentage">{{ percentage }}%</span>
         </div>
@@ -92,7 +92,6 @@ export default {
 .inner-bar {
   position: absolute;
   height: 16px;
-  width: 86%;
   background: linear-gradient(90.76deg, #62d7db 0%, #00afb5 100%);
   border-radius: 37px;
   top: 50%;
