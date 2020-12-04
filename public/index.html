@@ -4,8 +4,12 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="Description" content="Global Radiant Youth">
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <title><%= htmlWebpackPlugin.options.title %></title>
 
   <style>
@@ -15,9 +19,18 @@
     }
 
     body {
+      font-family: 'Raleway', sans-serif;
+      position: relative;
+      height: 100vh;
+      width: 100vw;
       -webkit-user-select: none;
       -webkit-tap-highlight-color: transparent;
       -webkit-touch-callout: none;
+    }
+
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar {
+      display: none;
     }
   </style>
 </head>
@@ -28,7 +41,6 @@
       Please enable it to continue.</strong>
   </noscript>
   <div id="app"></div>
-  <!-- built files will be auto injected -->
 </body>
 
 </html>

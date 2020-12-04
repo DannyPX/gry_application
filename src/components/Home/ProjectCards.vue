@@ -1,24 +1,22 @@
 <template>
-  <div class="projects">
-    <div class="project">
-      <div
-        :style="'background-image: ' + 'url(' + image + ');'"
-        class="img"
-      ></div>
-      <div class="info">
-        <span class="title">{{ title }}</span>
-        <div class="progress">
-          <div class="bar">
-            <div :style="'width: ' + percentage + '%;'" class="inner-bar"></div>
-          </div>
-          <span class="percentage">{{ percentage }}%</span>
+  <div class="project">
+    <div
+      :style="'background-image: ' + 'url(' + image + ');'"
+      class="img"
+    ></div>
+    <div class="info">
+      <span class="title">{{ title }}</span>
+      <div class="progress">
+        <div class="bar">
+          <div :style="'width: ' + percentage + '%;'" class="inner-bar"></div>
         </div>
-        <div class="buttons">
-          <div class="button1-outer">
-            <div class="button1-inner">See info</div>
-          </div>
-          <div class="button2">Donate</div>
+        <span class="percentage">{{ percentage }}%</span>
+      </div>
+      <div class="buttons">
+        <div class="button1-outer">
+          <div class="button1-inner">See info</div>
         </div>
+        <div class="button2">Donate</div>
       </div>
     </div>
   </div>
@@ -36,12 +34,8 @@ export default {
 </script>
 
 <style scoped>
-.projects {
-  position: relative;
-  height: calc(100vh - 50px);
-}
-
 .project {
+  position: relative;
   width: auto;
   height: 490px;
   background: #fff;
@@ -68,7 +62,7 @@ export default {
   text-align: center;
   color: #000;
   font-size: 1.4rem;
-  font-weight: 600;
+  font-weight: 700;
   padding-bottom: 15px;
   border-bottom: 1.2px solid #000;
 }
@@ -101,7 +95,9 @@ export default {
 
 .percentage {
   display: block;
-  font-size: 0.95rem;
+  font-family: "Montserrat";
+  font-size: 0.9rem;
+  font-weight: 500;
   line-height: 22px;
 }
 

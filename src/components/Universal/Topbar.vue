@@ -1,14 +1,17 @@
 <template>
   <div id="topbar">
-    <img
-      v-if="back"
-      src="../../assets/back.svg"
-      @click="goBack"
-      alt="To previous page"
-    />
-    <div v-else class="placeholder"></div>
-    <span>{{ title }}</span>
-    <div class="placeholder"></div>
+    <div class="filler"></div>
+    <div class="wrap">
+      <img
+        v-if="back"
+        src="../../assets/back.svg"
+        @click="goBack"
+        alt="To previous page"
+      />
+      <div v-else class="placeholder"></div>
+      <span>{{ title }}</span>
+      <div class="placeholder"></div>
+    </div>
   </div>
 </template>
 
@@ -29,10 +32,19 @@ export default {
 
 <style scoped>
 #topbar {
-  position: fixed;
-  width: 100vw;
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.filler {
+  width: inherit;
+  height: 57px;
+}
+
+.wrap {
+  width: inherit;
   height: 18px;
-  margin-top: 57px;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
@@ -49,7 +61,7 @@ img {
 span {
   display: block;
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .placeholder {

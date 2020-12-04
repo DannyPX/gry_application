@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <Topbar title="Projects" />
-    <flickity class="projects" ref="flickity" :options="flickityOptions">
+    <flickity class="projects" :options="flickityOptions">
       <ProjectCards
         class="project-item"
         v-for="(project, index) in projects"
@@ -60,8 +60,8 @@ export default {
 </script>
 
 <style>
-.flickity-page-dots {
-  bottom: 80px;
+.projects .flickity-viewport {
+  height: calc(60vh + 30px) !important;
 }
 
 .flickity-page-dots .dot {
@@ -82,8 +82,12 @@ export default {
 </style>
 
 <style scoped>
+.projects {
+  margin-top: 5vh;
+}
+
 .project-item {
-  margin-right: 20px;
+  margin-right: 30px;
   display: flex;
   align-items: center;
 }
