@@ -36,9 +36,10 @@ export default {
 <style scoped>
 .project {
   position: relative;
-  width: auto;
+  width: 86vw;
   max-width: 320px;
-  height: 490px;
+  height: auto;
+  max-height: 490px;
   background: #fff;
   border-radius: 24px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.16);
@@ -49,7 +50,9 @@ export default {
 
 .img {
   width: auto;
-  height: 310px;
+  max-width: 86vw;
+  height: calc(40vh);
+  /* height: 310px; */
   background-size: cover;
   background-position: center;
   border-radius: 24px;
@@ -63,7 +66,7 @@ export default {
   display: block;
   text-align: center;
   color: #000;
-  font-size: 1.4rem;
+  font-size: clamp(1.2rem, 6vw, 1.4rem);
   font-weight: 700;
   padding-bottom: 15px;
   border-bottom: 1.2px solid #000;
@@ -113,7 +116,7 @@ export default {
 .button1-outer {
   position: relative;
   height: 45px;
-  width: 130px;
+  width: calc(50% - 10px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -124,7 +127,7 @@ export default {
 .button1-inner {
   position: absolute;
   height: 39px;
-  width: 124px;
+  width: calc(100% - 7px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -145,5 +148,26 @@ export default {
   width: 130px;
   background: linear-gradient(180deg, #62d7db 0%, #00afb5 100%);
   border-radius: 30px;
+}
+
+@media screen and (max-width: 350px) {
+  .info {
+    padding: 10px;
+  }
+
+  .title {
+    padding-bottom: 10px;
+  }
+
+  .progress {
+    margin-top: 10px;
+  }
+
+  .buttons {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    margin-top: 10px;
+  }
 }
 </style>

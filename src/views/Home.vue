@@ -52,6 +52,26 @@ export default {
       ]
     };
   },
+  methods: {
+    centerProjects() {
+      let projectWidth =
+        document.querySelector(".project").offsetWidth / 2 + "px";
+      let projects = document.querySelectorAll(".splide__slide");
+
+      projects.forEach(project => {
+        project.style.paddingLeft = `calc(50vw - ${projectWidth})`;
+      });
+    }
+  },
+  created() {
+    window.addEventListener("resize", this.centerProjects);
+  },
+  mounted() {
+    this.centerProjects();
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.centerProjects);
+  },
   components: {
     Splide,
     SplideSlide,
@@ -63,7 +83,7 @@ export default {
 
 <style scoped>
 .projects {
-  margin-top: 5vh;
+  margin-top: 55px;
 }
 </style>
 
@@ -90,6 +110,6 @@ export default {
 }
 
 .splide__slide {
-  padding-left: calc((100vw - 320px) / 2);
+  /* padding-left: calc((100vw - 320px) / 2); */
 }
 </style>
