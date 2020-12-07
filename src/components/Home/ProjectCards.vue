@@ -13,22 +13,37 @@
         <span class="percentage">{{ percentage }}%</span>
       </div>
       <div class="buttons">
-        <div class="button1-outer">
-          <div class="button1-inner">See info</div>
-        </div>
-        <div class="button2">Donate</div>
+        <Button name="See info" :inner="true" @clicked="btnClicked" />
+        <Button name="Donate" :inner="false" @clicked="btnClicked" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import Button from "@/components/Universal/Button.vue";
+
 export default {
   name: "ProjectCards",
   props: {
     title: String,
     image: String,
     percentage: Number
+  },
+  methods: {
+    btnClicked(e) {
+      switch (e) {
+        case "See info":
+          console.log("See info was clicked");
+          break;
+        case "Donate":
+          console.log("Donate was clicked");
+          break;
+      }
+    }
+  },
+  components: {
+    Button
   }
 };
 </script>
@@ -127,7 +142,7 @@ export default {
 .button1-inner {
   position: absolute;
   height: 39px;
-  width: calc(100% - 7px);
+  width: calc(100% - 6px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -164,9 +179,6 @@ export default {
   }
 
   .buttons {
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
     margin-top: 10px;
   }
 }

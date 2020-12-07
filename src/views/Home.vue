@@ -18,9 +18,9 @@
 
 <script>
 import { Splide, SplideSlide } from "@splidejs/vue-splide";
+import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import ProjectCards from "@/components/Home/ProjectCards.vue";
 import Topbar from "@/components/Universal/Topbar.vue";
-import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 
 export default {
   name: "Home",
