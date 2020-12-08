@@ -13,6 +13,7 @@
         />
       </splide-slide>
     </splide>
+    <Navbar />
   </div>
 </template>
 
@@ -21,6 +22,7 @@ import { Splide, SplideSlide } from "@splidejs/vue-splide";
 import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import ProjectCards from "@/components/Home/ProjectCards.vue";
 import Topbar from "@/components/Universal/Topbar.vue";
+import Navbar from "@/components/Universal/Navbar.vue";
 
 export default {
   name: "Home",
@@ -76,7 +78,8 @@ export default {
     Splide,
     SplideSlide,
     ProjectCards,
-    Topbar
+    Topbar,
+    Navbar
   }
 };
 </script>
@@ -104,12 +107,9 @@ export default {
 .splide__pagination__page.is-active {
   transform: scale(1.2);
   background: linear-gradient(180deg, #62d7db 0%, #00afb5 100%);
+  opacity: 1;
   border: none;
   box-sizing: border-box;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.splide__slide {
-  /* padding-left: calc((100vw - 320px) / 2); */
 }
 </style>
