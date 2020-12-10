@@ -35,6 +35,20 @@
         v-on:readytopaychange="onReadyToPayChange"
         v-bind:onPaymentAuthorized.prop="onPaymentDataAuthorized"
       ></google-pay-button>
+      <PayPal
+        class="paypal"
+        :amount="value.toFixed(2)"
+        currency="USD"
+        :client="credentials"
+        env="sandbox"
+        :button-style="{
+          label: 'paypal',
+          size: 'responsive',
+          shape: 'rect',
+          color: 'blue'
+        }"
+      >
+      </PayPal>
     </div>
   </div>
 </template>
@@ -42,6 +56,7 @@
 <script>
 import Topbar from "@/components/Universal/Topbar.vue";
 import DonationTitle from "@/components/Donation/DonationTitle.vue";
+import PayPal from "vue-paypal-checkout";
 import "@google-pay/button-element";
 
 export default {
@@ -75,6 +90,11 @@ export default {
           merchantId: "12345678901234567890",
           merchantName: "Demo Merchant"
         }
+      },
+      credentials: {
+        sandbox:
+          "access_token$sandbox$my2fccxtzh9zsmvq$f61aeb5725980aabcc113ca11038eafa",
+        production: "<production client id>"
       }
     };
   },
@@ -98,7 +118,8 @@ export default {
   },
   components: {
     Topbar,
-    DonationTitle
+    DonationTitle,
+    PayPal
   }
 };
 </script>
@@ -119,6 +140,7 @@ export default {
   border: none;
   text-align: center;
   font-family: "Montserrat";
+  width: calc(100vw - 90px);
 }
 
 .support {
@@ -126,11 +148,19 @@ export default {
   font-size: 1.05rem;
   font-weight: 300;
 }
+
+.paypal {
+  overflow: hidden;
+  height: 35px;
+  box-shadow: 0px 2px 5px rgba(4, 20, 69, 0.1);
+}
 </style>
 
 <style>
-.gpay-button {
+.gpay-button,
+.paypal {
   width: calc(100vw - 90px) !important;
   max-width: 290px;
+  margin-bottom: 10px;
 }
 </style>
