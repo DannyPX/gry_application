@@ -9,7 +9,33 @@
         currency="USD"
         locale="en"
       />
-      <button @click="test">klik</button>
+      <div>
+        <google-pay-button
+          environment="TEST"
+          button-type="donate"
+          v-bind:button-color="buttonColor"
+          v-bind:existing-payment-method-required="existingPaymentMethodRequired"
+          v-bind:paymentRequest.prop="{
+            apiVersion: paymentRequest.apiVersion,
+            apiVersionMinor: paymentRequest.apiVersionMinor,
+            allowedPaymentMethods: paymentRequest.allowedPaymentMethods,
+            merchantInfo: paymentRequest.merchantInfo,
+            transactionInfo: {
+              totalPriceStatus: 'FINAL',
+              totalPriceLabel: 'Total',
+              totalPrice: value.toFixed(2),
+              currencyCode: 'USD',
+              countryCode: 'US',
+            },
+            shippingAddressRequired: true,
+            callbackIntents: ['PAYMENT_AUTHORIZATION'],
+          }"
+          v-on:loadpaymentdata="onLoadPaymentData"
+          v-on:error="onError"
+          v-on:readytopaychange="onReadyToPayChange"
+          v-bind:onPaymentAuthorized.prop="onPaymentDataAuthorized"
+        ></google-pay-button>
+      </div>
     </div>
   </div>
 </template>
@@ -17,18 +43,59 @@
 <script>
 import Topbar from "@/components/Universal/Topbar.vue";
 import DonationTitle from "@/components/Donation/DonationTitle.vue";
+import '@google-pay/button-element'
 
 export default {
   name: "Donate",
   data() {
     return {
-      value: 1
+      value: 1,
+      existingPaymentMethodRequired: false,
+      buttonColor: 'default',
+      buttonType: 'buy',
+      paymentRequest: {
+        apiVersion: 2,
+        apiVersionMinor: 0,
+        allowedPaymentMethods: [
+          {
+            type: 'CARD',
+            parameters: {
+              allowedAuthMethods: ['PAN_ONLY', 'CRYPTOGRAM_3DS'],
+              allowedCardNetworks: ['MASTERCARD', 'VISA'],
+            },
+            tokenizationSpecification: {
+              type: 'PAYMENT_GATEWAY',
+              parameters: {
+                gateway: 'example',
+                gatewayMerchantId: 'exampleGatewayMerchantId',
+              },
+            },
+          },
+        ],
+        merchantInfo: {
+          merchantId: '12345678901234567890',
+          merchantName: 'Demo Merchant',
+        },
+      },
     };
   },
   methods: {
-    test() {
-      console.log(this.value.toFixed(2));
-    }
+    onLoadPaymentData: event => {
+      console.log('load payment data', event.detail);
+    },
+    onError: event => {
+      console.error('error', event.error);
+    },
+    onPaymentDataAuthorized: paymentData => {
+      console.log('payment authorized', paymentData);
+
+      return {
+        transactionState: 'SUCCESS',
+      };
+    },
+    onReadyToPayChange: event => {
+      console.log('ready to pay change', event.detail);
+    },
   },
   components: {
     Topbar,
