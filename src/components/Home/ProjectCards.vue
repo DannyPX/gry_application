@@ -82,7 +82,7 @@ export default {
   text-align: center;
   color: #000;
   font-size: clamp(1.2rem, 6vw, 1.4rem);
-  font-weight: 700;
+  font-weight: 600;
   padding-bottom: 15px;
   border-bottom: 1.2px solid #000;
 }
@@ -117,7 +117,7 @@ export default {
   display: block;
   font-family: "Montserrat";
   font-size: 0.9rem;
-  font-weight: 500;
+  font-weight: 400;
   line-height: 22px;
 }
 

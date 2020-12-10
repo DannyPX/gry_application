@@ -62,7 +62,7 @@ img {
 span {
   display: block;
   font-size: 1.1rem;
-  font-weight: 800;
+  font-weight: 600;
 }
 
 .placeholder {
