@@ -9,36 +9,32 @@
         :currency="null"
         locale="en"
       />
-      <div>
-        <google-pay-button
-          environment="TEST"
-          button-type="donate"
-          v-bind:button-color="buttonColor"
-          v-bind:existing-payment-method-required="
-            existingPaymentMethodRequired
-          "
-          v-bind:paymentRequest.prop="{
-            apiVersion: paymentRequest.apiVersion,
-            apiVersionMinor: paymentRequest.apiVersionMinor,
-            allowedPaymentMethods: paymentRequest.allowedPaymentMethods,
-            merchantInfo: paymentRequest.merchantInfo,
-            transactionInfo: {
-              totalPriceStatus: 'FINAL',
-              totalPriceLabel: 'Total',
-              totalPrice: value.toFixed(2),
-              currencyCode: 'USD',
-              countryCode: 'US'
-            },
-            shippingAddressRequired: true,
-            callbackIntents: ['PAYMENT_AUTHORIZATION']
-          }"
-          v-on:loadpaymentdata="onLoadPaymentData"
-          v-on:error="onError"
-          v-on:readytopaychange="onReadyToPayChange"
-          v-bind:onPaymentAuthorized.prop="onPaymentDataAuthorized"
-        ></google-pay-button>
-      </div>
       <span class="support">Thank you for your support</span>
+      <google-pay-button
+        environment="TEST"
+        button-type="donate"
+        v-bind:button-color="buttonColor"
+        v-bind:existing-payment-method-required="existingPaymentMethodRequired"
+        v-bind:paymentRequest.prop="{
+          apiVersion: paymentRequest.apiVersion,
+          apiVersionMinor: paymentRequest.apiVersionMinor,
+          allowedPaymentMethods: paymentRequest.allowedPaymentMethods,
+          merchantInfo: paymentRequest.merchantInfo,
+          transactionInfo: {
+            totalPriceStatus: 'FINAL',
+            totalPriceLabel: 'Total',
+            totalPrice: value.toFixed(2),
+            currencyCode: 'USD',
+            countryCode: 'US'
+          },
+          shippingAddressRequired: true,
+          callbackIntents: ['PAYMENT_AUTHORIZATION']
+        }"
+        v-on:loadpaymentdata="onLoadPaymentData"
+        v-on:error="onError"
+        v-on:readytopaychange="onReadyToPayChange"
+        v-bind:onPaymentAuthorized.prop="onPaymentDataAuthorized"
+      ></google-pay-button>
     </div>
   </div>
 </template>
@@ -54,7 +50,7 @@ export default {
     return {
       value: 1,
       existingPaymentMethodRequired: false,
-      buttonColor: "default",
+      buttonColor: "white",
       buttonType: "buy",
       paymentRequest: {
         apiVersion: 2,
@@ -118,7 +114,7 @@ export default {
 }
 
 .input {
-  margin-top: 50px;
+  margin-top: 40px;
   font-size: 3rem;
   border: none;
   text-align: center;
@@ -128,5 +124,13 @@ export default {
 .support {
   margin: 10px 0 50px 0;
   font-size: 1.05rem;
+  font-weight: 300;
+}
+</style>
+
+<style>
+.gpay-button {
+  width: calc(100vw - 90px) !important;
+  max-width: 290px;
 }
 </style>
