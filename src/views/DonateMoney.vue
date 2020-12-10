@@ -35,6 +35,19 @@
         v-on:readytopaychange="onReadyToPayChange"
         v-bind:onPaymentAuthorized.prop="onPaymentDataAuthorized"
       ></google-pay-button>
+      <PayPal
+        :amount="value.toFixed(2)"
+        currency="USD"
+        :client="credentials"
+        env="sandbox"
+        :button-style="{
+          label: 'paypal',
+          size:  'responsive',    
+          shape: 'rect',         
+          color: 'black'         
+        }"
+        >
+      </PayPal>
     </div>
   </div>
 </template>
@@ -42,7 +55,9 @@
 <script>
 import Topbar from "@/components/Universal/Topbar.vue";
 import DonationTitle from "@/components/Donation/DonationTitle.vue";
+import PayPal from 'vue-paypal-checkout'
 import "@google-pay/button-element";
+
 
 export default {
   name: "Donate",
@@ -75,6 +90,10 @@ export default {
           merchantId: "12345678901234567890",
           merchantName: "Demo Merchant"
         }
+      },
+      credentials: {
+        sandbox: 'access_token$sandbox$my2fccxtzh9zsmvq$f61aeb5725980aabcc113ca11038eafa',
+        production: '<production client id>'
       }
     };
   },
@@ -98,7 +117,8 @@ export default {
   },
   components: {
     Topbar,
-    DonationTitle
+    DonationTitle,
+    PayPal
   }
 };
 </script>
