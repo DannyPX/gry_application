@@ -6,10 +6,10 @@
       <currency-input
         class="input"
         v-model="value"
-        currency="USD"
+        :currency="null"
         locale="en"
       />
-      <button @click="test">klik</button>
+      <span class="support">Thank you for your support</span>
     </div>
   </div>
 </template>
@@ -24,11 +24,6 @@ export default {
     return {
       value: 1
     };
-  },
-  methods: {
-    test() {
-      console.log(this.value.toFixed(2));
-    }
   },
   components: {
     Topbar,
@@ -49,9 +44,14 @@ export default {
 
 .input {
   margin-top: 50px;
-  height: 30px;
-  font-size: 1.2rem;
+  font-size: 3rem;
   border: none;
   text-align: center;
+  font-family: "Montserrat";
+}
+
+.support {
+  margin: 10px 0 50px 0;
+  font-size: 1.05rem;
 }
 </style>
