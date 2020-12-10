@@ -37,7 +37,7 @@ export default {
           console.log("See info was clicked");
           break;
         case "Donate":
-          console.log("Donate was clicked");
+          this.$router.push("/donate-money");
           break;
       }
     }

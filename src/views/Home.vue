@@ -60,7 +60,7 @@ export default {
         document.querySelector(".project").offsetWidth / 2 + "px";
       let projects = document.querySelectorAll(".splide__slide");
 
-      projects.forEach(project => {
+      projects.forEach((project) => {
         project.style.paddingLeft = `calc(50vw - ${projectWidth})`;
       });
     }

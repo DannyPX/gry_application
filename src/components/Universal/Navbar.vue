@@ -133,7 +133,7 @@ export default {
       let paths = activeNav.querySelectorAll(".path");
       let i = 0;
 
-      paths.forEach(path => {
+      paths.forEach((path) => {
         i++;
         setTimeout(() => {
           path.style.stroke = "url(#linear)";
