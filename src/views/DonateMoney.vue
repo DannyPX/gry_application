@@ -3,13 +3,31 @@
     <Topbar :back="true" title="Donation" />
     <div class="container">
       <DonationTitle title="Project" name="A Dreaming Child Center" />
-      <currency-input
-        class="input"
-        v-model="value"
-        :currency="null"
-        locale="en"
-        @keyup.enter="loseFocus"
-      />
+      <div class="donation-amount">
+        <span class="currency">$</span>
+        <currency-input
+          class="input"
+          v-model="value"
+          :currency="null"
+          locale="en"
+          :allow-negative="false"
+          @keyup.enter="loseFocus"
+          @input="inputSize"
+          @blur.native="inputSize"
+        />
+        <div class="buttons">
+          <img
+            @click="changeValue('up')"
+            src="./../assets/up.svg"
+            alt="Increase the donation amount"
+          />
+          <img
+            @click="changeValue('down')"
+            src="./../assets/down.svg"
+            alt="Decrease the donation amount"
+          />
+        </div>
+      </div>
       <span class="support">Thank you for your support</span>
       <google-pay-button
         environment="TEST"
@@ -63,6 +81,7 @@
 <script>
 import Topbar from "@/components/Universal/Topbar.vue";
 import DonationTitle from "@/components/Donation/DonationTitle.vue";
+import { CurrencyInput } from "vue-currency-input";
 import PayPal from "vue-paypal-checkout";
 import "@google-pay/button-element";
 
@@ -134,11 +153,30 @@ export default {
     },
     onPaypalCancelled() {
       console.log("Cancelled")
+    },
+    changeValue(val) {
+      switch (val) {
+        case "up":
+          this.value++;
+          this.inputSize();
+          break;
+        case "down":
+          if (this.value > 1) this.value--;
+          this.inputSize();
+          break;
+      }
+    },
+    inputSize() {
+      let input = document.querySelector(".input");
+      input.style.width = 0;
+      let width = input.scrollWidth + 10;
+      input.style.width = width + "px";
     }
   },
   components: {
     Topbar,
     DonationTitle,
+    CurrencyInput,
     PayPal
   },
 };
@@ -154,13 +192,41 @@ export default {
   align-items: center;
 }
 
-.input {
+.donation-amount {
   margin-top: 40px;
+  height: 58px;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  width: fit-content;
+  max-width: calc(100vw - 90px);
+}
+
+.currency {
+  font-family: "Montserrat";
+  font-size: 2.5rem;
+  color: #787878;
+}
+
+.input {
   font-size: 3rem;
+  margin: 0 15px;
+  min-width: 0;
+  width: 90px;
   border: none;
   text-align: center;
   font-family: "Montserrat";
-  width: calc(100vw - 90px);
+}
+
+.buttons {
+  display: flex;
+  height: 100%;
+  flex-flow: column nowrap;
+  justify-content: space-evenly;
+}
+
+.buttons img {
+  padding: 5px 0;
 }
 
 .support {
@@ -181,6 +247,10 @@ export default {
   background: #009cde;
   border-radius: 5px;
   box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.paypal-button:hover {
+  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.2);
 }
 </style>
 
