@@ -19,6 +19,11 @@ const routes = [
     path: "/newsfeed",
     name: "Newsfeed",
     component: () => import("../views/Newsfeed.vue")
+  },
+  {
+    path: "/intro",
+    name: "Intro",
+    component: () => import("../views/Intro.vue")
   }
 ];
 
