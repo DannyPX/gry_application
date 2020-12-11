@@ -21,16 +21,21 @@ const routes = [
     component: () => import("../views/Newsfeed.vue")
   },
   {
-    path: '/donate-money',
-    name: '/Donate-Money',
-    component: () => import('../views/DonateMoney.vue')
+    path: "/donate-money",
+    name: "/Donate-Money",
+    component: () => import("../views/DonateMoney.vue")
   },
   {
-    path: '/donate-complete',
-    name: 'Donate-Complete',
-    component: () => import('../views/DonateComplete.vue'),
+    path: "/donate-complete",
+    name: "Donate-Complete",
+    component: () => import("../views/DonateComplete.vue"),
     props: true
   },
+  {
+    path: "/project-details",
+    name: "/Project-Details",
+    component: () => import("../views/ProjectDetails.vue")
+  }
 ];
 
 const router = new VueRouter({

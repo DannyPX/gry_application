@@ -2,7 +2,7 @@
   <div>
     <Topbar :back="true" title="Donation" />
     <div class="container">
-      <DonationTitle title="Project" name="A Dreaming Child Center" />
+      <DonationTitle title="Project" :name="$route.params.title" />
       <div class="donation-amount">
         <span class="currency">$</span>
         <currency-input

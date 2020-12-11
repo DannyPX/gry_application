@@ -5,6 +5,7 @@
       <img
         v-if="back"
         src="../../assets/back.svg"
+        :class="detailed ? 'layer' : false"
         @click="goBack"
         alt="To previous page"
       />
@@ -20,7 +21,8 @@ export default {
   name: "Topbar",
   props: {
     title: String,
-    back: Boolean
+    back: Boolean,
+    detailed: Boolean
   },
   methods: {
     goBack() {
@@ -56,7 +58,16 @@ export default {
 img {
   width: 16px;
   height: 16px;
+  padding: 10px;
+  box-sizing: unset;
   cursor: pointer;
+}
+
+.layer {
+  background: #ffffff;
+  padding: 10px;
+  box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
 }
 
 span {
@@ -68,9 +79,10 @@ span {
 .placeholder {
   width: 16px;
   height: 16px;
+  padding: 10px;
 }
 
-@media only screen and (max-height: 800px) {
+@media only screen and (max-height: 750px) {
   .filler {
     height: 40px;
   }
