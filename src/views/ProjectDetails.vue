@@ -3,23 +3,23 @@
     <Topbar :back="true" :detailed="true" />
     <div class="container">
       <div
-        :style="'background-image: ' + 'url(' + image + ');'"
+        :style="'background-image: ' + 'url(' + activeProject.image + ');'"
         class="header"
       />
       <div class="info">
-        <span class="title">{{ title }}</span>
+        <span class="title">{{ activeProject.title }}</span>
         <div class="progress">
           <div class="bar">
-            <div :style="'width: ' + percentage + '%;'" class="inner-bar" />
+            <div
+              :style="'width: ' + activeProject.percentage + '%;'"
+              class="inner-bar"
+            />
           </div>
-          <span class="percentage">{{ percentage }}%</span>
+          <span class="percentage">{{ activeProject.percentage }}%</span>
         </div>
         <span class="subtitle">Overview</span>
         <span class="description">
-          The center comprises of a nursery school, a library and a computer
-          lab. It provides children and local communities with space and
-          resources to access quality education and to allow them to explore the
-          world around them and beyond.
+          {{ activeProject.content }}
         </span>
         <span class="more">- Click to read more -</span>
         <span class="subtitle last">Image Gallery</span>
@@ -32,6 +32,7 @@
 <script>
 import Topbar from "@/components/Universal/Topbar.vue";
 import DonateBar from "@/components/Donation/DonateBar.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "ProjectDetails",
@@ -41,6 +42,9 @@ export default {
       title: "A Dreaming Child Center",
       percentage: 86
     };
+  },
+  computed: {
+    ...mapGetters("Content", ["activeProject"])
   },
   components: {
     Topbar,

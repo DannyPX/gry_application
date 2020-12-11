@@ -22,6 +22,7 @@
 
 <script>
 import Button from "@/components/Universal/Button.vue";
+import { mapActions } from "vuex";
 
 export default {
   name: "ProjectCards",
@@ -31,20 +32,19 @@ export default {
     percentage: Number
   },
   methods: {
+    ...mapActions("Content", ["setActiveProject"]),
     btnClicked(e) {
       switch (e) {
         case "See info":
+          this.setActiveProject(this.title);
           this.$router.push({
-            name: "/Project-Details",
-            // TODO: Dynamic Title
-            params: { title: this.title }
+            name: "/Project-Details"
           });
           break;
         case "Donate":
+          this.setActiveProject(this.title);
           this.$router.push({
-            name: "/Donate-Money",
-            // TODO: Dynamic Title
-            params: { title: this.title }
+            name: "/Donate-Money"
           });
           break;
       }
