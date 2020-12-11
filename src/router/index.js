@@ -21,9 +21,14 @@ const routes = [
     component: () => import("../views/Newsfeed.vue")
   },
   {
-    path: '/donate-money',
-    name: '/Donate-Money',
-    component: () => import('../views/DonateMoney.vue')
+    path: "/donate-money",
+    name: "/Donate-Money",
+    component: () => import("../views/DonateMoney.vue")
+  },
+  {
+    path: "/project-details",
+    name: "/Project-Details",
+    component: () => import("../views/ProjectDetails.vue")
   }
 ];
 

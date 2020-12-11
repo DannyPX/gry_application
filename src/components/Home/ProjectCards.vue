@@ -34,10 +34,16 @@ export default {
     btnClicked(e) {
       switch (e) {
         case "See info":
-          console.log("See info was clicked");
+          this.$router.push({
+            name: "/Project-Details",
+            params: { title: this.title }
+          });
           break;
         case "Donate":
-          this.$router.push("/donate-money");
+          this.$router.push({
+            name: "/Donate-Money",
+            params: { title: this.title }
+          });
           break;
       }
     }
