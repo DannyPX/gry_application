@@ -60,7 +60,7 @@ export default {
         document.querySelector(".project").offsetWidth / 2 + "px";
       let projects = document.querySelectorAll(".splide__slide");
 
-      projects.forEach((project) => {
+      projects.forEach(project => {
         project.style.paddingLeft = `calc(50vw - ${projectWidth})`;
       });
     }
@@ -87,6 +87,18 @@ export default {
 <style scoped>
 .projects {
   margin-top: 55px;
+}
+
+@media only screen and (max-height: 800px) {
+  .projects {
+    margin-top: 30px;
+  }
+}
+
+@media only screen and (max-height: 700px) {
+  .projects {
+    margin-top: 20px;
+  }
 }
 </style>
 

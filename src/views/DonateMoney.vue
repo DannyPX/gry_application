@@ -8,6 +8,7 @@
         v-model="value"
         :currency="null"
         locale="en"
+        @keyup.enter="loseFocus"
       />
       <span class="support">Thank you for your support</span>
       <google-pay-button
@@ -35,20 +36,22 @@
         v-on:readytopaychange="onReadyToPayChange"
         v-bind:onPaymentAuthorized.prop="onPaymentDataAuthorized"
       ></google-pay-button>
-      <PayPal
-        class="paypal"
-        :amount="value.toFixed(2)"
-        currency="USD"
-        :client="credentials"
-        env="sandbox"
-        :button-style="{
-          label: 'paypal',
-          size: 'responsive',
-          shape: 'rect',
-          color: 'blue'
-        }"
-      >
-      </PayPal>
+      <div class="paypal-button">
+        <PayPal
+          class="paypal"
+          :amount="value.toFixed(2)"
+          currency="USD"
+          :client="credentials"
+          env="sandbox"
+          :button-style="{
+            label: 'paypal',
+            size: 'responsive',
+            shape: 'rect',
+            color: 'blue'
+          }"
+        >
+        </PayPal>
+      </div>
     </div>
   </div>
 </template>
@@ -99,21 +102,24 @@ export default {
     };
   },
   methods: {
-    onLoadPaymentData: (event) => {
+    onLoadPaymentData: event => {
       console.log("load payment data", event.detail);
     },
-    onError: (event) => {
+    onError: event => {
       console.error("error", event.error);
     },
-    onPaymentDataAuthorized: (paymentData) => {
+    onPaymentDataAuthorized: paymentData => {
       console.log("payment authorized", paymentData);
 
       return {
         transactionState: "SUCCESS"
       };
     },
-    onReadyToPayChange: (event) => {
+    onReadyToPayChange: event => {
       console.log("ready to pay change", event.detail);
+    },
+    loseFocus() {
+      document.querySelector(".input").blur();
     }
   },
   components: {
@@ -146,13 +152,25 @@ export default {
 .support {
   margin: 10px 0 50px 0;
   font-size: 1.05rem;
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .paypal {
+  position: absolute;
+  margin-top: 2px;
+}
+
+.paypal-button {
+  position: relative;
   overflow: hidden;
-  height: 35px;
-  box-shadow: 0px 2px 5px rgba(4, 20, 69, 0.1);
+  height: 40px;
+  background: #009cde;
+  border-radius: 5px;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+}
+
+.paypal-button:hover {
+  background: ;
 }
 </style>
 

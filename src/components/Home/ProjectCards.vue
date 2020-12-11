@@ -67,7 +67,6 @@ export default {
   width: auto;
   max-width: 86vw;
   height: calc(40vh);
-  /* height: 310px; */
   background-size: cover;
   background-position: center;
   border-radius: 24px;

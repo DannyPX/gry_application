@@ -29,13 +29,13 @@ span {
 
 .title {
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 5px;
 }
 
 .name {
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 700;
   color: #787878;
   padding-bottom: 10px;
   border-bottom: 1px solid #787878;

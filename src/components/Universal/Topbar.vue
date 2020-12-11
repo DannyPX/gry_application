@@ -62,11 +62,23 @@ img {
 span {
   display: block;
   font-size: 1.1rem;
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .placeholder {
   width: 16px;
   height: 16px;
+}
+
+@media only screen and (max-height: 800px) {
+  .filler {
+    height: 40px;
+  }
+}
+
+@media only screen and (max-height: 700px) {
+  .filler {
+    height: 20px;
+  }
 }
 </style>

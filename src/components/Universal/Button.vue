@@ -21,6 +21,7 @@ export default {
 
 <style scoped>
 .button-outer {
+  cursor: pointer;
   position: relative;
   height: 45px;
   width: clamp(118px, 35vw, 126px);
