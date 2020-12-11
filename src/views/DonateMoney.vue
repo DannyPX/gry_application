@@ -2,7 +2,7 @@
   <div>
     <Topbar :back="true" title="Donation" />
     <div class="container">
-      <DonationTitle title="Project" :name="$route.params.title" />
+      <DonationTitle title="Project" :name="activeProject.title" />
       <div class="donation-amount">
         <span class="currency">$</span>
         <currency-input
@@ -84,6 +84,7 @@ import DonationTitle from "@/components/Donation/DonationTitle.vue";
 import { CurrencyInput } from "vue-currency-input";
 import PayPal from "vue-paypal-checkout";
 import "@google-pay/button-element";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Donate",
@@ -118,16 +119,21 @@ export default {
         }
       },
       credentials: {
-        sandbox:
-          "<sandbox client id>",
+        sandbox: "<sandbox client id>",
         production: "<production client id>"
       }
     };
   },
+  computed: {
+    ...mapGetters("Content", ["activeProject"])
+  },
   methods: {
     onLoadPaymentData(event) {
       console.log("load payment data", event.detail);
-      this.$router.push({ name: 'Donate-Complete', params: { name: event.detail.shippingAddress.name }})
+      this.$router.push({
+        name: "Donate-Complete",
+        params: { name: event.detail.shippingAddress.name }
+      });
     },
     onError: event => {
       console.error("error", event.error);
@@ -145,14 +151,17 @@ export default {
       document.querySelector(".input").blur();
     },
     onPaypalAuthorized() {
-      console.log("Authorized")
+      console.log("Authorized");
     },
     onPaypalCompleted(event) {
-      console.log("Completed", event)
-      this.$router.push({ name: 'Donate-Complete', params: { name: event.payer.payer_info.shipping_address.recipient_name }})
+      console.log("Completed", event);
+      this.$router.push({
+        name: "Donate-Complete",
+        params: { name: event.payer.payer_info.shipping_address.recipient_name }
+      });
     },
     onPaypalCancelled() {
-      console.log("Cancelled")
+      console.log("Cancelled");
     },
     changeValue(val) {
       switch (val) {
@@ -178,7 +187,7 @@ export default {
     DonationTitle,
     CurrencyInput,
     PayPal
-  },
+  }
 };
 </script>
 
@@ -246,7 +255,8 @@ export default {
   height: 40px;
   background: #009cde;
   border-radius: 5px;
-  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 1px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 1px 0px,
+    rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
 .paypal-button:hover {

@@ -2,10 +2,7 @@
   <div id="home">
     <Topbar title="Projects" />
     <splide :options="options" class="projects">
-      <splide-slide
-        v-for="(project, index) in projects"
-        :key="'project: ' + index"
-      >
+      <splide-slide v-for="(project, index) in temp" :key="'project: ' + index">
         <ProjectCards
           :title="project.title"
           :image="project.image"
@@ -23,6 +20,7 @@ import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import ProjectCards from "@/components/Home/ProjectCards.vue";
 import Topbar from "@/components/Universal/Topbar.vue";
 import Navbar from "@/components/Universal/Navbar.vue";
+import { mapGetters } from "vuex";
 
 export default {
   name: "Home",
@@ -34,25 +32,11 @@ export default {
         gap: "2rem",
         autoHeight: true,
         arrows: false
-      },
-      projects: [
-        {
-          title: "A Dreaming Child Center",
-          image: require("../assets/project1.jpg"),
-          percentage: 86
-        },
-        {
-          title: "Youth Social Exchange",
-          image: require("../assets/project2.jpeg"),
-          percentage: 62
-        },
-        {
-          title: "Youth Voice Festival",
-          image: require("../assets/project3.jpg"),
-          percentage: 73
-        }
-      ]
+      }
     };
+  },
+  computed: {
+    ...mapGetters("Content", ["temp"])
   },
   methods: {
     centerProjects() {
