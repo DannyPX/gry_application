@@ -12,5 +12,8 @@ module.exports = {
     workboxOptions: {
       swSrc: "./src/service-worker.js"
     }
-  }
+  },
+  devServer: {
+    https: true,
+  },
 };

@@ -49,6 +49,10 @@
             shape: 'rect',
             color: 'blue'
           }"
+          ref="uniqueName"
+          v-on:payment-authorized="onPaypalAuthorized"
+          v-on:payment-completed="onPaypalCompleted"
+          v-on:payment-cancelled="onPaypalCancelled"
         >
         </PayPal>
       </div>
@@ -96,21 +100,21 @@ export default {
       },
       credentials: {
         sandbox:
-          "access_token$sandbox$my2fccxtzh9zsmvq$f61aeb5725980aabcc113ca11038eafa",
+          "<sandbox client id>",
         production: "<production client id>"
       }
     };
   },
   methods: {
-    onLoadPaymentData: event => {
+    onLoadPaymentData(event) {
       console.log("load payment data", event.detail);
+      this.$router.push({ name: 'Donate-Complete', params: { name: event.detail.shippingAddress.name }})
     },
     onError: event => {
       console.error("error", event.error);
     },
     onPaymentDataAuthorized: paymentData => {
       console.log("payment authorized", paymentData);
-
       return {
         transactionState: "SUCCESS"
       };
@@ -120,13 +124,23 @@ export default {
     },
     loseFocus() {
       document.querySelector(".input").blur();
+    },
+    onPaypalAuthorized() {
+      console.log("Authorized")
+    },
+    onPaypalCompleted(event) {
+      console.log("Completed", event)
+      this.$router.push({ name: 'Donate-Complete', params: { name: event.payer.payer_info.shipping_address.recipient_name }})
+    },
+    onPaypalCancelled() {
+      console.log("Cancelled")
     }
   },
   components: {
     Topbar,
     DonationTitle,
     PayPal
-  }
+  },
 };
 </script>
 

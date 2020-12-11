@@ -24,7 +24,13 @@ const routes = [
     path: '/donate-money',
     name: '/Donate-Money',
     component: () => import('../views/DonateMoney.vue')
-  }
+  },
+  {
+    path: '/donate-complete',
+    name: 'Donate-Complete',
+    component: () => import('../views/DonateComplete.vue'),
+    props: true
+  },
 ];
 
 const router = new VueRouter({
