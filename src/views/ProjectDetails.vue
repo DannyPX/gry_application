@@ -14,13 +14,24 @@
           </div>
           <span class="percentage">{{ percentage }}%</span>
         </div>
+        <span class="subtitle">Overview</span>
+        <span class="description">
+          The center comprises of a nursery school, a library and a computer
+          lab. It provides children and local communities with space and
+          resources to access quality education and to allow them to explore the
+          world around them and beyond.
+        </span>
+        <span class="more">- Click to read more -</span>
+        <span class="subtitle last">Image Gallery</span>
       </div>
     </div>
+    <DonateBar />
   </div>
 </template>
 
 <script>
 import Topbar from "@/components/Universal/Topbar.vue";
+import DonateBar from "@/components/Donation/DonateBar.vue";
 
 export default {
   name: "ProjectDetails",
@@ -32,7 +43,8 @@ export default {
     };
   },
   components: {
-    Topbar
+    Topbar,
+    DonateBar
   }
 };
 </script>
@@ -74,7 +86,7 @@ span {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 .bar {
@@ -102,5 +114,21 @@ span {
   font-size: 0.9rem;
   font-weight: 400;
   line-height: 22px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 10px 0 5px 0;
+}
+
+.more {
+  margin-top: 5px;
+  text-align: center;
+  color: #00afb5;
+}
+
+.last {
+  margin-bottom: 20vh;
 }
 </style>

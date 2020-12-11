@@ -36,12 +36,14 @@ export default {
         case "See info":
           this.$router.push({
             name: "/Project-Details",
+            // TODO: Dynamic Title
             params: { title: this.title }
           });
           break;
         case "Donate":
           this.$router.push({
             name: "/Donate-Money",
+            // TODO: Dynamic Title
             params: { title: this.title }
           });
           break;
