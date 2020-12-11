@@ -246,7 +246,7 @@ export default {
   height: 40px;
   background: #009cde;
   border-radius: 5px;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 1px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
 }
 
 .paypal-button:hover {
