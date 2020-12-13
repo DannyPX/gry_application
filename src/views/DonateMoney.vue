@@ -2,7 +2,10 @@
   <div>
     <Topbar :back="true" title="Donation" />
     <div class="container">
-      <DonationTitle title="Project" :name="activeProject.title" />
+      <DonationTitle
+        :title="activeProject.title != null ? 'Project' : 'Financial support'"
+        :name="activeProject.title"
+      />
       <div class="donation-amount">
         <span class="currency">$</span>
         <currency-input
@@ -200,7 +203,7 @@ export default {
   position: relative;
   display: flex;
   flex-flow: column nowrap;
-  height: calc(100vh - 150px);
+  height: calc(100vh - 120px);
   justify-content: center;
   align-items: center;
 }
@@ -267,15 +270,15 @@ export default {
   box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.2);
 }
 
-@media only screen and (max-height: 800px) {
+@media only screen and (max-height: 760px) {
   .container {
-    height: calc(100vh - 125px);
+    height: calc(100vh - 90px);
   }
 }
 
 @media only screen and (max-height: 700px) {
   .container {
-    height: calc(100vh - 115px);
+    height: calc(100vh - 50px);
   }
 }
 </style>

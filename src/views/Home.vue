@@ -20,7 +20,7 @@ import "@splidejs/splide/dist/css/themes/splide-default.min.css";
 import ProjectCards from "@/components/Home/ProjectCards.vue";
 import Topbar from "@/components/Universal/Topbar.vue";
 import Navbar from "@/components/Universal/Navbar.vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "Home",
@@ -39,6 +39,7 @@ export default {
     ...mapGetters("Content", ["temp"])
   },
   methods: {
+    ...mapActions("Content", ["resetActiveProject"]),
     centerProjects() {
       let projectWidth =
         document.querySelector(".project").offsetWidth / 2 + "px";
@@ -50,6 +51,7 @@ export default {
     }
   },
   created() {
+    this.resetActiveProject();
     window.addEventListener("resize", this.centerProjects);
   },
   mounted() {

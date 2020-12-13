@@ -57,6 +57,9 @@ export default {
     SET_ACTIVE_PROJECT(state, data) {
       let index = state.tempProjects.findIndex(x => x.title == data);
       state.activeProject = state.tempProjects[index];
+    },
+    RESET_ACTIVE_PROJECT(state) {
+      state.activeProject = {};
     }
   },
   actions: {
@@ -83,6 +86,9 @@ export default {
     },
     setActiveProject({ commit }, title) {
       commit("SET_ACTIVE_PROJECT", title);
+    },
+    resetActiveProject({ commit }) {
+      commit("RESET_ACTIVE_PROJECT");
     }
   },
   getters: {

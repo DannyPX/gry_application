@@ -12,9 +12,7 @@ export default {
   methods: {
     toDonate() {
       this.$router.push({
-        name: "/Donate-Money",
-        // TODO: Dynamic title
-        params: { title: "A Dreaming Child Center" }
+        name: "/Donate-Money"
       });
     }
   },
