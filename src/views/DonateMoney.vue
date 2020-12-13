@@ -177,9 +177,13 @@ export default {
     },
     inputSize() {
       let input = document.querySelector(".input");
-      input.style.width = 0;
-      let width = input.scrollWidth + 10;
-      input.style.width = width + "px";
+      let promise = new Promise(function(resolve) {
+        resolve((input.style.width = 0));
+      });
+      promise.then(function() {
+        let width = input.scrollWidth + 10;
+        input.style.width = width + "px";
+      });
     }
   },
   components: {
@@ -261,6 +265,18 @@ export default {
 
 .paypal-button:hover {
   box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.2);
+}
+
+@media only screen and (max-height: 800px) {
+  .container {
+    height: calc(100vh - 125px);
+  }
+}
+
+@media only screen and (max-height: 700px) {
+  .container {
+    height: calc(100vh - 115px);
+  }
 }
 </style>
 
