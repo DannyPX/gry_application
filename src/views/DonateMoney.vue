@@ -90,7 +90,7 @@ import "@google-pay/button-element";
 import { mapGetters } from "vuex";
 
 export default {
-  name: "Donate",
+  name: "DonateMoney",
   data() {
     return {
       value: 1,

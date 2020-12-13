@@ -26,6 +26,11 @@ const routes = [
     component: () => import("../views/DonateMoney.vue")
   },
   {
+    path: "/donate-goods",
+    name: "/Donate-Goods",
+    component: () => import("../views/DonateGoods.vue")
+  },
+  {
     path: "/donate-complete",
     name: "Donate-Complete",
     component: () => import("../views/DonateComplete.vue"),

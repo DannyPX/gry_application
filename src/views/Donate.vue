@@ -24,7 +24,7 @@
         <div @click="navigateTo('/donate-money')" class="btn">
           <img src=".././assets/financial.svg" alt="Donate financially" />
         </div>
-        <div @click="navigateTo('/donate-product')" class="btn">
+        <div @click="navigateTo('/donate-goods')" class="btn">
           <img src=".././assets/products.svg" alt="Donate products" />
         </div>
       </div>
