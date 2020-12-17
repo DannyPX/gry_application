@@ -11,7 +11,7 @@
       <div class="button">
         <Button name="Home" :inner="true" @clicked="btnClicked" />
       </div>
-      <div class="button">
+      <div class="button" v-if="ifMobile">
         <Button name="Share" @clicked="btnClicked" />
       </div>
     </div>
@@ -25,19 +25,33 @@ export default {
   components: { Button },
   name: "DonateComplete",
   props: {
-    name: String
+    name: String,
+    ifMobile: {
+      default: /Mobi|Android/i.test(navigator.userAgent)
+    }
   },
   methods: {
-    btnClicked(e) {
+    async btnClicked(e) {
+      const shareData = {
+        title: 'Global Radiant Youth',
+        text: 'Look! I\u0027ve donated to Global Radiant Youth. Go check it out!',
+        url: window.location.origin,
+      }
+
       switch (e) {
         case "Home":
           this.$router.push("/");
           break;
         case "Share":
-            // TODO: Sharing
+          try {
+            await navigator.share(shareData)
+            console.log("successfully shared")
+          } catch(err) {
+            console.error("Error: " + err)
+          }
           break;
       }
-    }
+    },
   }
 };
 </script>
