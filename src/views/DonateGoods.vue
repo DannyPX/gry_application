@@ -38,18 +38,55 @@ export default {
     },
     showDetails(id) {
       if (this.active == null) {
-        console.log("1");
-        this.expandBox(id);
+        this.editBox(
+          id,
+          -1,
+          "100vw",
+          "100vh",
+          "*",
+          "60vw",
+          "0 10px",
+          "flex",
+          "increase"
+        );
       } else if (this.active == id) {
-        console.log("2");
-        this.simplifyBox(this.active);
+        this.editBox(
+          this.active,
+          "initial",
+          "163px",
+          "175px",
+          "/",
+          "40vw",
+          "0",
+          "none",
+          "decrease"
+        );
       } else {
-        console.log("3");
-        this.simplifyBox(this.active);
-        this.expandBox(id);
+        this.editBox(
+          this.active,
+          "initial",
+          "163px",
+          "175px",
+          "/",
+          "40vw",
+          "0",
+          "none",
+          "decrease"
+        );
+        this.editBox(
+          id,
+          -1,
+          "100vw",
+          "100vh",
+          "*",
+          "60vw",
+          "0 10px",
+          "flex",
+          "increase"
+        );
       }
     },
-    expandBox(id) {
+    editBox(id, order, maxW, maxH, operator, imgSize, padding, display, type) {
       let product = document.getElementById(id);
       let image = product.querySelector(".image");
       let wrap = product.querySelector(".wrap");
@@ -57,30 +94,22 @@ export default {
       let width = product.offsetWidth;
       let height = product.offsetHeight;
 
-      product.style.order = -1;
-      this.changeMax(product, "100vw", "100vh");
-      this.changeSize(product, width, height, "*");
-      this.changeSize(image, "60vw", "60vw");
-      wrap.style.padding = "0 10px";
-      this.changeDetails(details, "flex");
-      window.scroll({ top: 0, behavior: "smooth" });
-      this.active = id;
-    },
-    simplifyBox(id) {
-      let product = document.getElementById(id);
-      let image = product.querySelector(".image");
-      let wrap = product.querySelector(".wrap");
-      let details = product.querySelectorAll(".details");
-      let width = product.offsetWidth;
-      let height = product.offsetHeight;
+      product.style.order = order;
+      this.changeMax(product, maxW, maxH);
+      this.changeSize(product, width, height, operator);
+      this.changeSize(image, imgSize, imgSize);
+      wrap.style.padding = padding;
+      this.changeDetails(details, display);
 
-      product.style.order = "initial";
-      this.changeMax(product, "163px", "175px");
-      this.changeSize(product, width, height, "/");
-      this.changeSize(image, "40vw", "40vw");
-      wrap.style.padding = "0";
-      this.changeDetails(details, "none");
-      this.active = null;
+      switch (type) {
+        case "increase":
+          window.scroll({ top: 0, behavior: "smooth" });
+          this.active = id;
+          break;
+        case "decrease":
+          this.active = null;
+          break;
+      }
     },
     changeMax(element, valueW, valueH) {
       element.style.maxWidth = valueW;
