@@ -3,36 +3,23 @@
     <Topbar :back="true" title="Donation" />
     <div class="container">
       <DonationTitle
-        :title="activeProject.title != null ? 'Project' : 'Financial support'"
-        :name="activeProject.title"
+        v-if="selectedProduct != null"
+        :title="'Product'"
+        :name="selectedProduct.title"
       />
       <div class="donation-amount">
         <span class="currency">$</span>
-        <currency-input
-          class="input"
-          v-model="value"
-          :currency="null"
-          locale="en"
-          :allow-negative="false"
-          @keyup.enter="loseFocus"
-          @input="inputSize"
-          @blur.native="inputSize"
-        />
+        <span v-if="selectedProduct != null" class="input">{{
+          selectedProduct.price.toFixed(2)
+        }}</span>
         <div class="buttons">
-          <img
-            @click="changeValue('up')"
-            src="./../assets/up.svg"
-            alt="Increase the donation amount"
-          />
-          <img
-            @click="changeValue('down')"
-            src="./../assets/down.svg"
-            alt="Decrease the donation amount"
-          />
+          <img src="./../assets/up.svg" />
+          <img src="./../assets/down.svg" />
         </div>
       </div>
       <span class="support">Thank you for your support</span>
       <google-pay-button
+        v-if="selectedProduct != null"
         environment="TEST"
         button-type="donate"
         v-bind:button-color="buttonColor"
@@ -45,7 +32,7 @@
           transactionInfo: {
             totalPriceStatus: 'FINAL',
             totalPriceLabel: 'Total',
-            totalPrice: value.toFixed(2),
+            totalPrice: selectedProduct.price.toFixed(2),
             currencyCode: 'USD',
             countryCode: 'US'
           },
@@ -57,10 +44,10 @@
         v-on:readytopaychange="onReadyToPayChange"
         v-bind:onPaymentAuthorized.prop="onPaymentDataAuthorized"
       ></google-pay-button>
-      <div class="paypal-button">
+      <div v-if="selectedProduct != null" class="paypal-button">
         <PayPal
           class="paypal"
-          :amount="value.toFixed(2)"
+          :amount="selectedProduct.price.toFixed(2)"
           currency="USD"
           :client="credentials"
           env="sandbox"
@@ -84,7 +71,6 @@
 <script>
 import Topbar from "@/components/Universal/Topbar.vue";
 import DonationTitle from "@/components/Donation/DonationTitle.vue";
-import { CurrencyInput } from "vue-currency-input";
 import PayPal from "vue-paypal-checkout";
 import "@google-pay/button-element";
 import { mapGetters } from "vuex";
@@ -93,7 +79,6 @@ export default {
   name: "DonateMoney",
   data() {
     return {
-      value: 1,
       existingPaymentMethodRequired: false,
       buttonColor: "white",
       buttonType: "buy",
@@ -128,7 +113,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("Content", ["activeProject"])
+    ...mapGetters("Goods", ["selectedProduct"])
   },
   methods: {
     onLoadPaymentData(event) {
@@ -166,18 +151,6 @@ export default {
     onPaypalCancelled() {
       console.log("Cancelled");
     },
-    changeValue(val) {
-      switch (val) {
-        case "up":
-          this.value++;
-          this.inputSize();
-          break;
-        case "down":
-          if (this.value > 1) this.value--;
-          this.inputSize();
-          break;
-      }
-    },
     inputSize() {
       let input = document.querySelector(".input");
       let promise = new Promise(function(resolve) {
@@ -189,10 +162,12 @@ export default {
       });
     }
   },
+  mounted() {
+    this.inputSize();
+  },
   components: {
     Topbar,
     DonationTitle,
-    CurrencyInput,
     PayPal
   }
 };
@@ -235,6 +210,7 @@ export default {
 }
 
 .buttons {
+  opacity: 0;
   display: flex;
   height: 100%;
   flex-flow: column nowrap;
@@ -242,7 +218,6 @@ export default {
 }
 
 .buttons img {
-  cursor: pointer;
   padding: 5px 0;
 }
 

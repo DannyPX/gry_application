@@ -8,29 +8,40 @@ export default {
       {
         id: "34hBL2KZXGg0z9lwL6mb1u",
         title: "Study books",
-        description: "This is a phone. (obviously)",
-        price: 200.0,
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa, lectus integer at urna a, dui dolor eu.",
+        price: 20,
         picture: "https://i.postimg.cc/3Jp0fwxD/books.png"
       },
       {
         id: "5jsMW2JXBd7hJ73aHgOQ5Y",
         title: "Calculator",
-        description: "An ugly table. \n",
-        price: 10.0,
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa, lectus integer at urna a, dui dolor eu.",
+        price: 7,
         picture: "https://i.postimg.cc/R0PWJ6X2/calculator.png"
       },
       {
         id: "1E7EFn8TeMkk4la37J76Sm",
         title: "Pens",
-        description: "This is the chair we need",
-        price: 5.0,
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Massa, lectus integer at urna a, dui dolor eu.",
+        price: 1,
         picture: "https://i.postimg.cc/nc8CmtGV/pens.png"
       }
-    ]
+    ],
+    selectedProduct: {}
   },
   mutations: {
     SET_GOODS(state, data) {
       state.goods = data;
+    },
+    SET_SELECTED_PRODUCT(state, data) {
+      let index = state.tempGoods.findIndex(x => x.title == data);
+      state.selectedProduct = state.tempGoods[index];
+    },
+    RESET_SELECTED_PRODUCT(state) {
+      state.selectedProduct = null;
     }
   },
   actions: {
@@ -40,6 +51,12 @@ export default {
           commit("SET_GOODS", res.data);
         }
       });
+    },
+    setSelectedProduct({ commit }, title) {
+      commit("SET_SELECTED_PRODUCT", title);
+    },
+    resetSelectedProduct({ commit }) {
+      commit("RESET_SELECTED_PRODUCT");
     }
   },
   getters: {
@@ -48,6 +65,9 @@ export default {
     },
     temp: state => {
       return state.tempGoods;
+    },
+    selectedProduct: state => {
+      return state.selectedProduct;
     }
   }
 };

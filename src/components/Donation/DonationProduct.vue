@@ -1,18 +1,27 @@
 <template>
   <div :id="'product_' + id" @click="productClicked" class="product">
     <div :style="'background-image: ' + 'url(' + image + ');'" class="image" />
-    <span>{{ name }}</span>
+    <div class="wrap">
+      <span class="name">{{ name }}</span>
+      <span class="description details">{{ description }}</span>
+      <Button @clicked="btnClicked" class="button details" name="Donate" />
+    </div>
   </div>
 </template>
 
 <script>
+import Button from "@/components/Universal/Button.vue";
+import { mapGetters } from "vuex";
+
 export default {
   name: "DonationProduct",
   props: {
     name: String,
+    description: String,
     image: String
   },
   computed: {
+    ...mapGetters("Goods", ["selectedProduct"]),
     id() {
       return this.name
         .split(" ")
@@ -23,21 +32,64 @@ export default {
   methods: {
     productClicked() {
       let product = document.getElementById("product_" + this.id);
+      let image = product.querySelector(".image");
+      let wrap = product.querySelector(".wrap");
+      let details = product.querySelectorAll(".details");
       let width = product.offsetWidth;
       let height = product.offsetHeight;
 
-      if (width < 163) {
-        product.style.maxWidth = "100vw";
-        product.style.maxHeight = "100vh";
-        product.style.width = width * 2 + "px";
-        product.style.height = height * 2 + "px";
+      if (width < 166) {
+        product.style.order = -1;
+        this.changeMax(product, "100vw", "100vh");
+        this.changeSize(product, width, height, "*");
+        this.changeSize(image, "60vw", "60vw");
+        wrap.style.padding = "0 10px";
+        this.changeDetails(details, "flex");
+        window.scroll({ top: 0, behavior: "smooth" });
       } else {
-        product.style.maxWidth = "163px";
-        product.style.maxHeight = "175px";
-        product.style.width = width / 2 + "px";
-        product.style.height = height / 2 + "px";
+        product.style.order = "initial";
+        this.changeMax(product, "163px", "175px");
+        this.changeSize(product, width, height, "/");
+        this.changeSize(image, "40vw", "40vw");
+        wrap.style.padding = "0";
+        this.changeDetails(details, "none");
       }
+    },
+    changeMax(element, valueW, valueH) {
+      element.style.maxWidth = valueW;
+      element.style.maxHeight = valueH;
+    },
+    changeSize(element, ogWidth, ogHeight, operator) {
+      let operators = {
+        "*": function(a, b) {
+          return a * b + "px";
+        },
+        "/": function(a, b) {
+          return a / b + "px";
+        }
+      };
+      element.style.width =
+        operator != null ? operators[operator](ogWidth, 2) : ogWidth;
+      element.style.height =
+        operator != null ? operators[operator](ogHeight, 2) : ogHeight;
+    },
+    changeDetails(element, value) {
+      element.forEach(item => {
+        item.style.display = value;
+      });
+    },
+    btnClicked() {
+      this.$emit("donateClicked", this.name);
     }
+  },
+  mounted() {
+    let details = document
+      .getElementById("product_" + this.id)
+      .querySelectorAll(".details");
+    this.changeDetails(details, "none");
+  },
+  components: {
+    Button
   }
 };
 </script>
@@ -57,7 +109,6 @@ export default {
   margin: 5px;
   padding: 10px;
   box-sizing: border-box;
-  transition: all 0.5s ease-in-out;
 }
 
 .image {
@@ -68,9 +119,28 @@ export default {
   background-repeat: no-repeat;
 }
 
+.wrap {
+  margin-top: auto;
+}
+
 span {
   display: block;
+}
+
+.name {
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
+}
+
+.description {
+  font-size: 0.95rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.button {
+  margin-bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
 }
 </style>

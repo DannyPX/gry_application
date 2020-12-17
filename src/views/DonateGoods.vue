@@ -7,6 +7,8 @@
         :key="index + ' ' + product.title"
         :name="product.title"
         :image="product.picture"
+        :description="product.description"
+        @donateClicked="toDonate"
       />
     </div>
   </div>
@@ -15,12 +17,19 @@
 <script>
 import Topbar from "@/components/Universal/Topbar.vue";
 import DonationProduct from "@/components/Donation/DonationProduct.vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "DonateGoods",
   computed: {
     ...mapGetters("Goods", ["temp"])
+  },
+  methods: {
+    ...mapActions("Goods", ["setSelectedProduct"]),
+    toDonate(name) {
+      this.setSelectedProduct(name);
+      this.$router.push("/donate-product");
+    }
   },
   components: {
     Topbar,
