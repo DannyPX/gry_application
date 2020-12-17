@@ -31,47 +31,7 @@ export default {
   },
   methods: {
     productClicked() {
-      let product = document.getElementById("product_" + this.id);
-      let image = product.querySelector(".image");
-      let wrap = product.querySelector(".wrap");
-      let details = product.querySelectorAll(".details");
-      let width = product.offsetWidth;
-      let height = product.offsetHeight;
-
-      if (width < 166) {
-        product.style.order = -1;
-        this.changeMax(product, "100vw", "100vh");
-        this.changeSize(product, width, height, "*");
-        this.changeSize(image, "60vw", "60vw");
-        wrap.style.padding = "0 10px";
-        this.changeDetails(details, "flex");
-        window.scroll({ top: 0, behavior: "smooth" });
-      } else {
-        product.style.order = "initial";
-        this.changeMax(product, "163px", "175px");
-        this.changeSize(product, width, height, "/");
-        this.changeSize(image, "40vw", "40vw");
-        wrap.style.padding = "0";
-        this.changeDetails(details, "none");
-      }
-    },
-    changeMax(element, valueW, valueH) {
-      element.style.maxWidth = valueW;
-      element.style.maxHeight = valueH;
-    },
-    changeSize(element, ogWidth, ogHeight, operator) {
-      let operators = {
-        "*": function(a, b) {
-          return a * b + "px";
-        },
-        "/": function(a, b) {
-          return a / b + "px";
-        }
-      };
-      element.style.width =
-        operator != null ? operators[operator](ogWidth, 2) : ogWidth;
-      element.style.height =
-        operator != null ? operators[operator](ogHeight, 2) : ogHeight;
+      this.$emit("productClicked", `product_${this.id}`);
     },
     changeDetails(element, value) {
       element.forEach(item => {
