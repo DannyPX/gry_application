@@ -56,6 +56,7 @@ export default {
 
 <style scoped>
 .product {
+  cursor: pointer;
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
@@ -72,6 +73,8 @@ export default {
 }
 
 .image {
+  max-width: 100%;
+  max-height: 100%;
   width: 40vw;
   height: 40vw;
   background-size: contain;

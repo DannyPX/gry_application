@@ -4,8 +4,7 @@
     <div class="container">
       <DonationTitle
         v-if="selectedProduct != null"
-        :title="'Product'"
-        :name="selectedProduct.title"
+        :title="selectedProduct.title"
       />
       <div class="donation-amount">
         <span class="currency">$</span>
@@ -243,7 +242,7 @@ export default {
 }
 
 .paypal-button:hover {
-  box-shadow: inset 0 0 100px 100px rgba(255, 255, 255, 0.2);
+  background: rgba(0, 156, 222, 0.65);
 }
 
 @media only screen and (max-height: 760px) {

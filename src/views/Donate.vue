@@ -97,6 +97,11 @@ export default {
   background: linear-gradient(180deg, #62d7db 0%, #00afb5 100%);
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
   margin: 10px;
+  transition: background 0.3s ease-in-out;
+}
+
+.btn:hover {
+  background: linear-gradient(90deg, #62d7db 0%, #00afb5 100%);
 }
 
 @media only screen and (max-height: 760px) {

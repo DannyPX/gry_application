@@ -33,6 +33,12 @@ export default {
   color: #ffffff;
   font-size: 1.1rem;
   font-weight: 600;
+  transition: background 0.3s ease-in-out;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.button-outer:hover {
+  background: linear-gradient(90deg, #62d7db 0%, #00afb5 100%);
 }
 
 .button-inner {
