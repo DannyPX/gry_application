@@ -11,13 +11,7 @@
     <div class="info">
       <span class="title">{{ title }}</span>
       <span class="text">{{ text }}</span>
-
-
-
     </div>
-    <button class="button2">
-      Start donating now
-    </button>
   </div>
 </template>
 
@@ -54,8 +48,8 @@ export default {
   position: relative;
   width: 86vw;
   max-width: 320px;
-  height: 95%;
-  max-height: 600px;
+
+
   background: transparent;
   border-radius: 24px;
   display: flex;
@@ -64,15 +58,16 @@ export default {
 }
 
 .img {
-  height: 280px;
+  height: 230px;
   position: relative;
   background-size: cover;
   background-position: center;
-  border-radius: 10000px;
+  border-radius: 50%;
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 88%;
+  width: 230px;
+  max-width: 100%;
   border: 2px solid deepskyblue;
 }
 .imglogo {
@@ -83,8 +78,6 @@ export default {
   display: block;
   margin-left: auto;
   margin-right: auto;
-
-
 }
 
 .info {
@@ -116,26 +109,6 @@ export default {
   padding-bottom: 15px;
 }
 
-.button2 {
-  display: flex;
-  position:relative;
-
-
-  width:100px;
-
-
-  align-items: center;
-  justify-content: center;
-  color: #FFF;
-  vertical-align: bottom;
-  font-size: 1.1rem;
-  font-weight: 600;
-  height: 45px;
-  width: 100%;
-  background: linear-gradient(180deg, #62d7db 0%, #00afb5 100%);
-  border-radius: 15px;
-}
-
 @media screen and (max-width: 350px) {
   .info {
     padding: 10px;
@@ -143,11 +116,6 @@ export default {
 
   .title {
     padding-bottom: 10px;
-  }
-
-
-  .buttons {
-    margin-top: 10px;
   }
 }
 </style>

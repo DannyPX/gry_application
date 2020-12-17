@@ -1,5 +1,5 @@
 <template>
-  <div id="home" :style="{'background-image': 'url(' + require('../assets/Intro/backgroundintro2.jpg') + ')'}">
+  <div class="home" :style="{'background-image': 'url(' + require('../assets/Intro/backgroundintro.jpg') + ')'}">
 
     <splide :options="options" class="projects">
       <splide-slide v-for="(project, index) in projects" :key="'project: ' + index"
@@ -11,7 +11,9 @@
         />
       </splide-slide>
     </splide>
-
+    <button class="button2">
+      Start donating now
+    </button>
   </div>
 </template>
 
@@ -30,7 +32,8 @@ export default {
         pagination: true,
         gap: "2rem",
         autoHeight: true,
-        arrows: false
+        arrows: false,
+
       },
       projects: [
         {
@@ -81,12 +84,16 @@ export default {
 </script>
 
 <style scoped>
+.home{
+
+  position: absolute;
+  top: 0px; /* Header Height */
+  bottom: 0px; /* Footer Height */
+  width: 100%;
+}
 .projects {
 
 }
-</style>
-
-<style>
 .splide__pagination {
   bottom: -5vh;
 }
@@ -97,26 +104,23 @@ export default {
   color: #000;
   font-size: clamp(1.2rem, 6vw, 1.4rem);
   font-weight: 700;
-
 }
 .button2 {
-  display: flex;
-  position:absolute;
-
-
-  width:100px;
-  bottom:0px;
-
+  position: fixed;
+  bottom: 0;
   align-items: center;
   justify-content: center;
   color: #FFF;
+  margin-left: 5%;
+  margin-right: 5%;
   vertical-align: bottom;
   font-size: 1.1rem;
+
   font-weight: 600;
   height: 45px;
-  width: 100%;
+  width: 90%;
   background: linear-gradient(180deg, #62d7db 0%, #00afb5 100%);
-  border-radius: 30px;
+  border-radius: 15px;
 }
 
 .splide__pagination__page {
@@ -137,3 +141,4 @@ export default {
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 </style>
+
