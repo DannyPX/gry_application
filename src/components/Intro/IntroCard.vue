@@ -1,12 +1,8 @@
 <template>
   <div class="project">
-    <div id="home" :style="{'background-image': 'url(' + require('@/assets/Intro/backgroundintro.jpg') + ')'}"/>
-    <div id="app">
-      <img class="imglogo" src="@/assets/Intro/logo.png">
-    </div>
     <div
-        :style="'background-image: ' + 'url(' + image + ');'"
-        class="img"
+      :style="'background-image: ' + 'url(' + image + ');'"
+      class="img"
     ></div>
     <div class="info">
       <span class="title">{{ title }}</span>
@@ -16,29 +12,12 @@
 </template>
 
 <script>
-
-
 export default {
   name: "ProjectCards",
   props: {
     title: String,
     image: String,
     text: String
-  },
-  methods: {
-    btnClicked(e) {
-      switch (e) {
-        case "See info":
-          console.log("See info was clicked");
-          break;
-        case "Donate":
-          console.log("Donate was clicked");
-          break;
-      }
-    }
-  },
-  components: {
-
   }
 };
 </script>
@@ -48,8 +27,6 @@ export default {
   position: relative;
   width: 86vw;
   max-width: 320px;
-
-
   background: transparent;
   border-radius: 24px;
   display: flex;
@@ -58,7 +35,8 @@ export default {
 }
 
 .img {
-  height: 230px;
+  height: 85vw;
+  max-height: 300px;
   position: relative;
   background-size: cover;
   background-position: center;
@@ -66,18 +44,9 @@ export default {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 230px;
-  max-width: 100%;
-  border: 2px solid deepskyblue;
-}
-.imglogo {
-  height: 90px;
-  max-height: 1000px;
-  background-size: cover;
-  background-position: center;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  width: 85vw;
+  max-width: 300px;
+  border: 2px solid #2ec3bb;
 }
 
 .info {
@@ -87,35 +56,31 @@ export default {
 .title {
   display: block;
   text-align: left;
-  color: #FFF;
-  font-size: 1.2rem;
+  color: #fff;
+  font-size: 1.3rem;
   font-weight: 600;
   padding-bottom: 15px;
 }
 .text {
   display: block;
   text-align: left;
-  color: #FFF;
-  font-size: 0.8rem;
+  color: #fff;
+  font-size: 0.9rem;
   font-weight: 400;
   padding-bottom: 15px;
 }
-.logo {
-  display: block;
-  text-align: center;
-  color: #FFF;
-  font-size: 1.4rem;
-  font-weight: 600;
-  padding-bottom: 15px;
+
+@media only screen and (max-height: 700px) {
+  .img {
+    max-height: 260px;
+    max-width: 260px;
+  }
 }
 
-@media screen and (max-width: 350px) {
-  .info {
-    padding: 10px;
-  }
-
-  .title {
-    padding-bottom: 10px;
+@media only screen and (max-height: 600px) {
+  .img {
+    max-height: 180px;
+    max-width: 180px;
   }
 }
 </style>
