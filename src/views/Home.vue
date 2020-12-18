@@ -87,27 +87,3 @@ export default {
   }
 }
 </style>
-
-<style>
-.splide__pagination {
-  bottom: -5vh;
-}
-
-.splide__pagination__page {
-  width: 14px;
-  height: 14px;
-  background: transparent;
-  border: 1px solid #787878;
-  box-sizing: border-box;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.splide__pagination__page.is-active {
-  transform: scale(1.2);
-  background: linear-gradient(180deg, #62d7db 0%, #00afb5 100%);
-  opacity: 1;
-  border: none;
-  box-sizing: border-box;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-}
-</style>

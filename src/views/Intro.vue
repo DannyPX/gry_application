@@ -19,7 +19,7 @@
         />
       </splide-slide>
     </splide>
-    <button class="button">
+    <button @click="toHome" class="button">
       Start to help
     </button>
   </div>
@@ -72,12 +72,19 @@ export default {
       projects.forEach(project => {
         project.style.paddingLeft = `calc(50vw - ${projectWidth})`;
       });
+    },
+    toHome() {
+      localStorage.setItem("intro", "seen");
+      this.$router.push("/home");
     }
   },
   created() {
     window.addEventListener("resize", this.centerProjects);
   },
   mounted() {
+    if (localStorage.getItem("intro") == "seen") {
+      this.$router.push("/home");
+    }
     this.centerProjects();
   },
   beforeDestroy() {
@@ -146,5 +153,29 @@ export default {
     height: 45px;
     bottom: 10px;
   }
+}
+</style>
+
+<style>
+.splide__pagination {
+  bottom: -5vh;
+}
+
+.splide__pagination__page {
+  width: 14px;
+  height: 14px;
+  background: transparent;
+  border: 1px solid #787878;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.splide__pagination__page.is-active {
+  transform: scale(1.2);
+  background: linear-gradient(180deg, #62d7db 0%, #00afb5 100%);
+  opacity: 1;
+  border: none;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 </style>

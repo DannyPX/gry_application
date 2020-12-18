@@ -1,12 +1,15 @@
 <template>
   <div class="container">
-    <img src="./../assets/thanks.jpg" alt=""/>
+    <img src="./../assets/thanks.jpg" alt="" />
     <br />
     <h1>Thank you {{ name }}!</h1>
     <br />
-    <p>Your donation is extremely important to our cause and we would like to thank you for your generosity. Your gift will help make dreams come true.</p>
+    <p>
+      Your donation is extremely important to our cause and we would like to
+      thank you for your generosity. Your gift will help make dreams come true.
+    </p>
     <br />
-    <p> Check our newsfeed to see how all our projects are progressing.</p>
+    <p>Check our newsfeed to see how all our projects are progressing.</p>
     <div class="buttons">
       <div class="button">
         <Button name="Home" :inner="true" @clicked="btnClicked" />
@@ -19,7 +22,7 @@
 </template>
 
 <script>
-import Button from '../components/Universal/Button.vue';
+import Button from "../components/Universal/Button.vue";
 
 export default {
   components: { Button },
@@ -33,25 +36,26 @@ export default {
   methods: {
     async btnClicked(e) {
       const shareData = {
-        title: 'Global Radiant Youth',
-        text: 'Look! I\u0027ve donated to Global Radiant Youth. Go check it out!',
-        url: window.location.origin,
-      }
+        title: "Global Radiant Youth",
+        text:
+          "Look! I\u0027ve donated to Global Radiant Youth. Go check it out!",
+        url: window.location.origin
+      };
 
       switch (e) {
         case "Home":
-          this.$router.push("/");
+          this.$router.push("/home");
           break;
         case "Share":
           try {
-            await navigator.share(shareData)
-            console.log("successfully shared")
-          } catch(err) {
-            console.error("Error: " + err)
+            await navigator.share(shareData);
+            console.log("successfully shared");
+          } catch (err) {
+            console.error("Error: " + err);
           }
           break;
       }
-    },
+    }
   }
 };
 </script>

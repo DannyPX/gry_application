@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Topbar :back="true" title="Newsfeed" />
+    <Topbar title="Newsfeed" />
 
     <Twitter></Twitter>
     <!--<post v-for="post in posts"
@@ -30,17 +30,18 @@ export default {
         {
           username: "Global Radiant Youth",
           userImage: require("../assets/project1.jpg"),
-          postImage:require("../assets/project3.jpg"),
-          caption: "Gakire, a writer, social entrepreneur and public speaker, grew up in the remote village of in Ruhango District."
+          postImage: require("../assets/project3.jpg"),
+          caption:
+            "Gakire, a writer, social entrepreneur and public speaker, grew up in the remote village of in Ruhango District."
         },
         {
           username: "Global Radiant Youth",
           userImage: require("../assets/project3.jpg"),
-          postImage:require("../assets/project3.jpg"),
+          postImage: require("../assets/project3.jpg"),
           caption: "Caption test"
         }
       ]
     };
-  },
+  }
 };
 </script>

@@ -2,7 +2,7 @@
   <div id="navbar">
     <div class="wrap">
       <svg
-        @click="navigateTo('/')"
+        @click="navigateTo('/home')"
         id="nav-Home"
         class="icon"
         xmlns="http://www.w3.org/2000/svg"
