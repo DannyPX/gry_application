@@ -54,23 +54,23 @@ export default {
     }
   },
   actions: {
-    checkSession({ dispatch }) {
-      !sessionStorage.getItem("projects")
-        ? dispatch("fetchProjects")
-        : dispatch("loadProjects");
+    async fetchProjects({ commit }) {
+      if (!sessionStorage.getItem("projects")) {
+        await api
+          .get("/projects")
+          .then(res => {
+            if (res.status === 200) {
+              commit("SET_PROJECTS", res.data);
+            }
+          })
+          .then(() => {
+            return;
+          });
+      } else {
+        let projects = JSON.parse(sessionStorage.getItem("projects"));
+        commit("SET_PROJECTS", projects);
+      }
     },
-    fetchProjects({ commit }) {
-      api.get("/projects").then(res => {
-        if (res.status === 200) {
-          commit("SET_PROJECTS", res.data);
-        }
-      });
-    },
-    loadProjects({ commit }) {
-      let projects = JSON.parse(sessionStorage.getItem("projects"));
-      commit("SET_PROJECTS", projects);
-    },
-
     setActiveProject({ commit }, title) {
       commit("SET_ACTIVE_PROJECT", title);
     },
