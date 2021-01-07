@@ -3,7 +3,7 @@
     <Topbar :back="true" title="Goods" />
     <div class="container">
       <DonationProduct
-        v-for="(product, index) in temp"
+        v-for="(product, index) in goods"
         :key="index + ' ' + product.title"
         :name="product.title"
         :image="product.picture"
@@ -28,10 +28,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("Goods", ["temp"])
+    ...mapGetters("Goods", ["goods"])
   },
   methods: {
-    ...mapActions("Goods", ["setSelectedProduct"]),
+    ...mapActions("Goods", ["setSelectedProduct", "loadGoods"]),
     toDonate(name) {
       this.setSelectedProduct(name);
       this.$router.push("/donate-product");
@@ -134,6 +134,9 @@ export default {
         item.style.display = value;
       });
     }
+  },
+  mounted() {
+    this.loadGoods();
   },
   components: {
     Topbar,
