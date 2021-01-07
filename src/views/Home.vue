@@ -1,8 +1,11 @@
 <template>
   <div id="home">
     <Topbar title="Projects" />
-    <splide :options="options" class="projects">
-      <splide-slide v-for="(project, index) in temp" :key="'project: ' + index">
+    <splide v-if="showProjects" :options="options" class="projects">
+      <splide-slide
+        v-for="(project, index) in projects"
+        :key="'project: ' + index"
+      >
         <ProjectCards
           :title="project.title"
           :image="project.image"
@@ -32,14 +35,15 @@ export default {
         gap: "2rem",
         autoHeight: true,
         arrows: false
-      }
+      },
+      showProjects: false
     };
   },
   computed: {
-    ...mapGetters("Content", ["temp"])
+    ...mapGetters("Content", ["temp", "projects"])
   },
   methods: {
-    ...mapActions("Content", ["resetActiveProject"]),
+    ...mapActions("Content", ["resetActiveProject", "checkSession"]),
     centerProjects() {
       let projectWidth =
         document.querySelector(".project").offsetWidth / 2 + "px";
@@ -51,11 +55,18 @@ export default {
     }
   },
   created() {
+    this.checkSession();
     this.resetActiveProject();
     window.addEventListener("resize", this.centerProjects);
   },
   mounted() {
-    this.centerProjects();
+    let promise = new Promise(function(resolve) {
+      resolve(sessionStorage.getItem("projects") !== null);
+    });
+
+    promise.then(function() {
+      this.showProjects = true;
+    });
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.centerProjects);
