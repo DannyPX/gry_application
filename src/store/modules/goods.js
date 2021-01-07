@@ -1,4 +1,6 @@
 import api from "@/api/api";
+import * as countries from 'i18n-iso-countries';
+
 
 export default {
   namespaced: true,
@@ -57,6 +59,17 @@ export default {
     },
     resetSelectedProduct({ commit }) {
       commit("RESET_SELECTED_PRODUCT");
+    },
+    pushDonate(context, data) {
+      countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
+      let body = {
+        countryName: countries.getName(data.countryCode, "en", {select: "official"}),
+        money: data.value.toFixed(2)
+      }
+      console.log(body)
+      // api.post("/donation/money", body, {
+      //   headers: { "Content-Type": "application/json" }
+      // })
     }
   },
   getters: {

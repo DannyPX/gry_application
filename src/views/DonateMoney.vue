@@ -122,7 +122,7 @@ export default {
         }
       },
       credentials: {
-        sandbox: "<sandbox client id>",
+        sandbox: "AZpIxP_8E-vCPqJGBGwQ0QRtkyUigWRjt50ELJOvI9FRb2VQUiCZJZvxexpLpz0e5TcD2oJfnSUFLTW2",
         production: "<production client id>"
       }
     };
@@ -133,6 +133,10 @@ export default {
   methods: {
     onLoadPaymentData(event) {
       console.log("load payment data", event.detail);
+      this.$store.dispatch("Goods/pushDonate", {
+        countryCode: event.detail.shippingAddress.countryCode,
+        value: this.value,
+      })
       this.$router.push({
         name: "Donate-Complete",
         params: { name: event.detail.shippingAddress.name }
@@ -158,6 +162,10 @@ export default {
     },
     onPaypalCompleted(event) {
       console.log("Completed", event);
+      this.$store.dispatch("Goods/pushDonate", {
+        countryCode: event.payer.payer_info.country_code,
+        value: this.value,
+      })
       this.$router.push({
         name: "Donate-Complete",
         params: { name: event.payer.payer_info.shipping_address.recipient_name }
