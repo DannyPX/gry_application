@@ -63,11 +63,13 @@ export default {
     }
   },
   actions: {
-    loadProjects({ commit }) {
-      api.get("/projects").then(res => {
+    async loadProjects({ commit }) {
+      await api.get("/projects").then(res => {
         if (res.status === 200) {
           commit("SET_PROJECTS", res.data);
         }
+      }).then(() => {
+        return
       });
     },
     loadProjectByID({ commit }, id) {
