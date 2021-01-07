@@ -48,9 +48,14 @@ export default {
 
       let index = state.projects.findIndex(x => x.title == data);
       state.activeProject = state.projects[index];
+      sessionStorage.setItem(
+        "activeProject",
+        JSON.stringify(state.projects[index])
+      );
     },
     RESET_ACTIVE_PROJECT(state) {
       state.activeProject = {};
+      sessionStorage.removeItem("activeProject");
     }
   },
   actions: {

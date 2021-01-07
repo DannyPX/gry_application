@@ -56,24 +56,17 @@ export default {
     }
   },
   created() {
-    this.checkSession();
     this.resetActiveProject();
     window.addEventListener("resize", this.centerProjects);
   },
   mounted() {
-    let promise = new Promise(function(resolve) {
-      resolve(sessionStorage.getItem("projects") !== null);
-    });
-
-    promise.then(function() {
-      this.showProjects = true;
-    });
+    this.centerProjects();
   },
   beforeDestroy() {
     window.removeEventListener("resize", this.centerProjects);
   },
   beforeRouteEnter(to, from, next) {
-    store.dispatch("Content/loadProjects").then(next);
+    store.dispatch("Content/fetchProjects").then(next);
   },
   components: {
     Splide,
