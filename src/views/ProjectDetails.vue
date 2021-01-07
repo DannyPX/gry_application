@@ -21,8 +21,8 @@
         <span class="description">
           {{ activeProject.content }}
         </span>
-        <span class="more">- Click to read more -</span>
-        <span class="subtitle last">Image Gallery</span>
+        <!-- <span class="more">- Click to read more -</span> -->
+        <!-- <span class="subtitle last">Image Gallery</span> -->
       </div>
     </div>
     <DonateBar />

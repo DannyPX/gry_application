@@ -31,6 +31,11 @@
           />
         </div>
       </div>
+      <div class="quick-addups">
+        <div @click="quickAdd(5)">$5</div>
+        <div @click="quickAdd(10)">$10</div>
+        <div @click="quickAdd(20)">$20</div>
+      </div>
       <span class="support">Thank you for your support</span>
       <google-pay-button
         environment="TEST"
@@ -195,6 +200,10 @@ export default {
         let width = input.scrollWidth + 10;
         input.style.width = width + "px";
       });
+    },
+    quickAdd(val) {
+      this.value = val;
+      this.inputSize();
     }
   },
   components: {
@@ -252,6 +261,32 @@ export default {
 .buttons img {
   cursor: pointer;
   padding: 5px 0;
+}
+
+.quick-addups {
+  display: flex;
+  flex-flow: row nowrap;
+  width: fit-content;
+  max-width: calc(100vw - 90px);
+  font-family: "Montserrat";
+  margin-top: 10px;
+  padding-top: 5px;
+  border-top: 1px solid black;
+}
+
+.quick-addups div {
+  cursor: pointer;
+  font-size: 1.4rem;
+  margin: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+  will-change: transform;
+  transition: 0.1s ease-in-out;
+}
+
+.quick-addups div:hover {
+  transform: scale(0.9);
 }
 
 .support {
