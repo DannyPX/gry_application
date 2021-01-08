@@ -2,7 +2,10 @@
   <div id="home">
     <Topbar title="Projects" />
     <splide :options="options" class="projects">
-      <splide-slide v-for="(project, index) in temp" :key="'project: ' + index">
+      <splide-slide
+        v-for="(project, index) in projects"
+        :key="'project: ' + index"
+      >
         <ProjectCards
           :title="project.title"
           :image="project.image"
@@ -21,7 +24,7 @@ import ProjectCards from "@/components/Home/ProjectCards.vue";
 import Topbar from "@/components/Universal/Topbar.vue";
 import Navbar from "@/components/Universal/Navbar.vue";
 import { mapGetters, mapActions } from "vuex";
-// import store from "@/store";
+import store from "@/store";
 
 export default {
   name: "Home",
@@ -38,7 +41,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters("Content", ["temp"])
+    ...mapGetters("Content", ["projects"])
   },
   methods: {
     ...mapActions("Content", ["resetActiveProject"]),
@@ -62,9 +65,9 @@ export default {
   beforeDestroy() {
     window.removeEventListener("resize", this.centerProjects);
   },
-  // beforeRouteEnter(to, from, next) {
-  //   store.dispatch("Content/fetchProjects").then(next);
-  // },
+  beforeRouteEnter(to, from, next) {
+    store.dispatch("Content/fetchProjects").then(next);
+  },
   components: {
     Splide,
     SplideSlide,
