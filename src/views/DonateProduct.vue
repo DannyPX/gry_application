@@ -122,7 +122,7 @@ export default {
       console.log("load payment data", event.detail);
       this.$store.dispatch("Goods/pushDonate", {
         countryCode: event.detail.shippingAddress.countryCode,
-        value: this.value
+        value: this.selectedProduct.price
       });
       this.$router.push({
         name: "Donate-Complete",
@@ -151,7 +151,7 @@ export default {
       console.log("Completed", event);
       this.$store.dispatch("Goods/pushDonate", {
         countryCode: event.payer.payer_info.country_code,
-        value: this.value
+        value: this.selectedProduct.price
       });
       this.$router.push({
         name: "Donate-Complete",
