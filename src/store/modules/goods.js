@@ -86,9 +86,9 @@ export default {
         money: data.value.toFixed(2)
       };
       console.log(body);
-      // api.post("/donation/money", body, {
-      //   headers: { "Content-Type": "application/json" }
-      // })
+      api.post("/donation/money", body, {
+        headers: { "Content-Type": "application/json" }
+      });
     }
   },
   getters: {
