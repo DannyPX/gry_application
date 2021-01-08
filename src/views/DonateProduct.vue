@@ -72,7 +72,7 @@ import Topbar from "@/components/Universal/Topbar.vue";
 import DonationTitle from "@/components/Donation/DonationTitle.vue";
 import PayPal from "vue-paypal-checkout";
 import "@google-pay/button-element";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "DonateMoney",
@@ -115,12 +115,13 @@ export default {
     ...mapGetters("Goods", ["selectedProduct"])
   },
   methods: {
+    ...mapActions("Goods", ["loadSelectedProduct"]),
     onLoadPaymentData(event) {
       console.log("load payment data", event.detail);
       this.$store.dispatch("Goods/pushDonate", {
         countryCode: event.detail.shippingAddress.countryCode,
-        value: this.value,
-      })
+        value: this.value
+      });
       this.$router.push({
         name: "Donate-Complete",
         params: { name: event.detail.shippingAddress.name }
@@ -148,8 +149,8 @@ export default {
       console.log("Completed", event);
       this.$store.dispatch("Goods/pushDonate", {
         countryCode: event.payer.payer_info.country_code,
-        value: this.value,
-      })
+        value: this.value
+      });
       this.$router.push({
         name: "Donate-Complete",
         params: { name: event.payer.payer_info.shipping_address.recipient_name }
@@ -168,6 +169,9 @@ export default {
         input.style.width = width + "px";
       });
     }
+  },
+  created() {
+    this.loadSelectedProduct();
   },
   mounted() {
     this.inputSize();

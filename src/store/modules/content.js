@@ -42,10 +42,6 @@ export default {
       sessionStorage.setItem("projects", JSON.stringify(data));
     },
     SET_ACTIVE_PROJECT(state, data) {
-      // COMMENTED CODE USES TEMP DATA
-      // let index = state.tempProjects.findIndex(x => x.title == data);
-      // state.activeProject = state.tempProjects[index];
-
       let index = state.projects.findIndex(x => x.title == data);
       state.activeProject = state.projects[index];
       localStorage.setItem("title", data);
