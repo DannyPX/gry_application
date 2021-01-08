@@ -19,7 +19,7 @@
       <span class="support">Thank you for your support</span>
       <google-pay-button
         v-if="selectedProduct != null"
-        environment="TEST"
+        :environment="gPayEnvironment"
         button-type="donate"
         v-bind:button-color="buttonColor"
         v-bind:existing-payment-method-required="existingPaymentMethodRequired"
@@ -49,7 +49,7 @@
           :amount="selectedProduct.price.toFixed(2)"
           currency="USD"
           :client="credentials"
-          env="sandbox"
+          :env="payPalEnvironment"
           :button-style="{
             label: 'paypal',
             size: 'responsive',
@@ -94,21 +94,23 @@ export default {
             tokenizationSpecification: {
               type: "PAYMENT_GATEWAY",
               parameters: {
-                gateway: "example",
-                gatewayMerchantId: "exampleGatewayMerchantId"
+                gateway: process.env.VUE_APP_GPAYGATEWAY,
+                gatewayMerchantId: process.env.VUE_APP_GPAYGATEWAYMERCHANTID
               }
             }
           }
         ],
         merchantInfo: {
-          merchantId: "12345678901234567890",
-          merchantName: "Demo Merchant"
+          merchantId: process.env.VUE_APP_GPAYMERCHANTID,
+          merchantName: process.env.VUE_APP_GPAYMERCHANTNAME
         }
       },
       credentials: {
-        sandbox: "<sandbox client id>",
-        production: "<production client id>"
-      }
+        sandbox: process.env.VUE_APP_PAYPALSANDBOXID,
+        production: process.env.VUE_APP_PAYPALCLIENTID
+      },
+      payPalEnvironment: process.env.VUE_APP_PAYPALENVIRONMENT,
+      gPayEnvironment: process.env.VUE_APP_GPAYENVIRONMENT
     };
   },
   computed: {
