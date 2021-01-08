@@ -42,12 +42,12 @@ export default {
       sessionStorage.setItem("projects", JSON.stringify(data));
     },
     SET_ACTIVE_PROJECT(state, data) {
-      let index = state.projects.findIndex(x => x.title == data);
-      state.activeProject = state.projects[index];
+      let index = state.tempProjects.findIndex(x => x.title == data);
+      state.activeProject = state.tempProjects[index];
       localStorage.setItem("title", data);
       sessionStorage.setItem(
         "activeProject",
-        JSON.stringify(state.projects[index])
+        JSON.stringify(state.tempProjects[index])
       );
     },
     LOAD_ACTIVE_PROJECT(state, dispatch) {

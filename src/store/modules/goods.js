@@ -38,12 +38,12 @@ export default {
       state.goods = data;
     },
     SET_SELECTED_PRODUCT(state, data) {
-      let index = state.goods.findIndex(x => x.title == data);
-      state.selectedProduct = state.goods[index];
+      let index = state.tempGoods.findIndex(x => x.title == data);
+      state.selectedProduct = state.tempGoods[index];
       localStorage.setItem("product", data);
       sessionStorage.setItem(
         "selectedProduct",
-        JSON.stringify(state.goods[index])
+        JSON.stringify(state.tempGoods[index])
       );
     },
     LOAD_SELECTED_PRODUCT(state, dispatch) {
@@ -94,6 +94,9 @@ export default {
   getters: {
     goods: state => {
       return state.goods;
+    },
+    temp: state => {
+      return state.tempGoods;
     },
     selectedProduct: state => {
       return state.selectedProduct;
