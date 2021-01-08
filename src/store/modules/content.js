@@ -42,16 +42,23 @@ export default {
       sessionStorage.setItem("projects", JSON.stringify(data));
     },
     SET_ACTIVE_PROJECT(state, data) {
-      // COMMENTED CODE USES TEMP DATA
-      // let index = state.tempProjects.findIndex(x => x.title == data);
-      // state.activeProject = state.tempProjects[index];
-
       let index = state.projects.findIndex(x => x.title == data);
       state.activeProject = state.projects[index];
+      localStorage.setItem("title", data);
       sessionStorage.setItem(
         "activeProject",
         JSON.stringify(state.projects[index])
       );
+    },
+    LOAD_ACTIVE_PROJECT(state, dispatch) {
+      if (!sessionStorage.getItem("activeProject")) {
+        const title = localStorage.getItem("title");
+        dispatch(`setActiveProject(${title})`);
+      } else {
+        state.activeProject = JSON.parse(
+          sessionStorage.getItem("activeProject")
+        );
+      }
     },
     RESET_ACTIVE_PROJECT(state) {
       state.activeProject = {};
@@ -78,6 +85,9 @@ export default {
     },
     setActiveProject({ commit }, title) {
       commit("SET_ACTIVE_PROJECT", title);
+    },
+    loadActiveProject({ commit }) {
+      commit("LOAD_ACTIVE_PROJECT");
     },
     resetActiveProject({ commit }) {
       commit("RESET_ACTIVE_PROJECT");

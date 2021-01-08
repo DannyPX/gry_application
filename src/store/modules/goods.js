@@ -1,6 +1,5 @@
 import api from "@/api/api";
-import * as countries from 'i18n-iso-countries';
-
+import * as countries from "i18n-iso-countries";
 
 export default {
   namespaced: true,
@@ -39,8 +38,23 @@ export default {
       state.goods = data;
     },
     SET_SELECTED_PRODUCT(state, data) {
-      let index = state.tempGoods.findIndex(x => x.title == data);
-      state.selectedProduct = state.tempGoods[index];
+      let index = state.goods.findIndex(x => x.title == data);
+      state.selectedProduct = state.goods[index];
+      localStorage.setItem("product", data);
+      sessionStorage.setItem(
+        "selectedProduct",
+        JSON.stringify(state.goods[index])
+      );
+    },
+    LOAD_SELECTED_PRODUCT(state, dispatch) {
+      if (!sessionStorage.getItem("selectedProduct")) {
+        const product = localStorage.getItem("product");
+        dispatch(`setSelectedProduct(${product})`);
+      } else {
+        state.selectedProduct = JSON.parse(
+          sessionStorage.getItem("selectedProduct")
+        );
+      }
     },
     RESET_SELECTED_PRODUCT(state) {
       state.selectedProduct = null;
@@ -57,16 +71,21 @@ export default {
     setSelectedProduct({ commit }, title) {
       commit("SET_SELECTED_PRODUCT", title);
     },
+    loadSelectedProduct({ commit }) {
+      commit("LOAD_SELECTED_PRODUCT");
+    },
     resetSelectedProduct({ commit }) {
       commit("RESET_SELECTED_PRODUCT");
     },
     pushDonate(context, data) {
       countries.registerLocale(require("i18n-iso-countries/langs/en.json"));
       let body = {
-        countryName: countries.getName(data.countryCode, "en", {select: "official"}),
+        countryName: countries.getName(data.countryCode, "en", {
+          select: "official"
+        }),
         money: data.value.toFixed(2)
-      }
-      console.log(body)
+      };
+      console.log(body);
       // api.post("/donation/money", body, {
       //   headers: { "Content-Type": "application/json" }
       // })
@@ -75,9 +94,6 @@ export default {
   getters: {
     goods: state => {
       return state.goods;
-    },
-    temp: state => {
-      return state.tempGoods;
     },
     selectedProduct: state => {
       return state.selectedProduct;

@@ -44,7 +44,7 @@ export default {
     ...mapGetters("Content", ["projects"])
   },
   methods: {
-    ...mapActions("Content", ["resetActiveProject", "checkSession"]),
+    ...mapActions("Content", ["resetActiveProject"]),
     centerProjects() {
       let projectWidth =
         document.querySelector(".project").offsetWidth / 2 + "px";

@@ -32,7 +32,7 @@
 <script>
 import Topbar from "@/components/Universal/Topbar.vue";
 import DonateBar from "@/components/Donation/DonateBar.vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   name: "ProjectDetails",
@@ -45,6 +45,12 @@ export default {
   },
   computed: {
     ...mapGetters("Content", ["activeProject"])
+  },
+  methods: {
+    ...mapActions("Content", ["loadActiveProject"])
+  },
+  mounted() {
+    this.loadActiveProject();
   },
   components: {
     Topbar,
